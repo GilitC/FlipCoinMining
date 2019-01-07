@@ -1,5 +1,5 @@
 package Model;
-
+//checking
 public class BSWallet extends Wallet {
 	
 	// -------------------------------Class  Members------------------------------
