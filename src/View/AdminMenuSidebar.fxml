@@ -38,37 +38,22 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToCreateReports" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Create Reports">
+            <Button mnemonicParsing="false" onAction="#GoToVIewTransRep" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="View Transaction Report">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToRecommendmenu" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Recommendations">
+            <Button mnemonicParsing="false" onAction="#GoToAddTransToBlock" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Select Transactions">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToTransactions" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Create Transaction">
+            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="---">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToProdMenu" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Manage Products">
-               <effect>
-                  <Glow />
-               </effect>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goToManageOrders" styleClass="menuButton" text="Manage Orders">
-               <effect>
-                  <Glow />
-               </effect>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goToWalletsMenu" styleClass="menuButton" text="Manage Wallets">
-               <effect>
-                  <Glow />
-               </effect>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goToManageUsers" styleClass="menuButton" text="Manage Users">
+            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="---">
                <effect>
                   <Glow />
                </effect>

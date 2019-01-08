@@ -45,40 +45,16 @@ public class AdminMenuController implements Initializable{
 		loadUI(NameToWindow.WELCOMESCREEN);
 	}
 
-	@FXML
-	void GoToCreateReports(ActionEvent event) {
-		loadUI(NameToWindow.MENU_REPORTS);
-	}
 
-	@FXML
-	void GoToTransactions(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
-	}
+    @FXML
+    void GoToVIewTransRep(ActionEvent event) {
+    	loadUI(NameToWindow.WELCOMESCREEN);
+    }
 
-	@FXML
-	void GoToProdMenu(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
-	}
-
-	@FXML
-	void GoToRecommendmenu(ActionEvent event) {
-		loadUI(NameToWindow.MENU_RECOMMENDATIONS);
-	}
-
-	@FXML
-	void goToManageOrders(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
-	}
-
-	@FXML
-	void goToWalletsMenu(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
-	}
-
-	@FXML
-	void goToManageUsers(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
-	}
+    @FXML
+    void GoToAddTransToBlock(ActionEvent event) {
+    	loadUI(NameToWindow.WELCOMESCREEN);
+    }
 
 
 	@FXML
