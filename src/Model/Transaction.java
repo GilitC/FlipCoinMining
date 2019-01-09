@@ -7,38 +7,30 @@ public abstract class Transaction {
 	// -------------------------------Class  Members------------------------------
 	
 	private String transactionID;
-	private String description;
-	private int sizeInBytes;
-	private Date dtCreated;
-	private Date dtFinished;
-	private String currentStatus; //[awaiting approval= default, confirmed, closed, irrelevant]
-	private double taxAmount;
-	private String toAddress;
-	private String publicAddress;
-	private String userSignature;
-	private int orderID;
-	private String uniqueAddress;
+	private int size;
+	private String type; //[confirm, pay]
+	private double fee;
+	private String blockAddress;
+	private Date additionTime;
+	private Date additionDate;
 	
 	
 	// -------------------------------Constructor------------------------------
-	
-	public Transaction(String transactionID, String description, int sizeInBytes, Date dtCreated, Date dtFinished,
-			String currentStatus, double taxAmount, String toAddress, String publicAddress, String userSignature, int orderID, String uniqueAddress) {
+
+	public Transaction(String transactionID, int size, String type, double fee, String blockAddress, Date additionTime,
+			Date additionDate) {
 		super();
 		this.transactionID = transactionID;
-		this.description = description;
-		this.sizeInBytes = sizeInBytes;
-		this.dtCreated = dtCreated;
-		this.dtFinished = dtFinished;
-		this.currentStatus = currentStatus;
-		this.taxAmount = taxAmount;
-		this.toAddress = toAddress;
-		this.publicAddress = publicAddress;
-		this.userSignature = userSignature;
-		this.uniqueAddress = uniqueAddress;
+		this.size = size;
+		this.type = type;
+		this.fee = fee;
+		this.blockAddress = blockAddress;
+		this.additionTime = additionTime;
+		this.additionDate = additionDate;
 	}
 
 	// -------------------------------Getters And Setters------------------------------
+	
 	public String getTransactionID() {
 		return transactionID;
 	}
@@ -49,117 +41,99 @@ public abstract class Transaction {
 	}
 
 
-	public String getDescription() {
-		return description;
+	public int getSize() {
+		return size;
 	}
 
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 
-	public int getSizeInBytes() {
-		return sizeInBytes;
+	public String getType() {
+		return type;
 	}
 
 
-	public void setSizeInBytes(int sizeInBytes) {
-		this.sizeInBytes = sizeInBytes;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 
-	public Date getDtCreated() {
-		return dtCreated;
+	public double getFee() {
+		return fee;
 	}
 
 
-	public void setDtCreated(Date dtCreated) {
-		this.dtCreated = dtCreated;
+	public void setFee(double fee) {
+		this.fee = fee;
 	}
 
 
-	public Date getDtFinished() {
-		return dtFinished;
+	public String getBlockAddress() {
+		return blockAddress;
 	}
 
 
-	public void setDtFinished(Date dtFinished) {
-		this.dtFinished = dtFinished;
+	public void setBlockAddress(String blockAddress) {
+		this.blockAddress = blockAddress;
 	}
 
 
-	public String getCurrentStatus() {
-		return currentStatus;
+	public Date getAdditionTime() {
+		return additionTime;
 	}
 
 
-	public void setCurrentStatus(String currentStatus) {
-		this.currentStatus = currentStatus;
+	public void setAdditionTime(Date additionTime) {
+		this.additionTime = additionTime;
 	}
 
 
-	public String getPublicAddress() {
-		return publicAddress;
-	}
-
-	public void setPublicAddress(String publicAddress) {
-		this.publicAddress = publicAddress;
-	}
-
-	public String getUserSignature() {
-		return userSignature;
-	}
-
-	public void setUserSignature(String userSignature) {
-		this.userSignature = userSignature;
-	}
-
-	public int getOrderID() {
-		return orderID;
-	}
-
-	public void setOrderID(int orderID) {
-		this.orderID = orderID;
-	}
-
-	public String getUniqueAddress() {
-		return uniqueAddress;
-	}
-
-	public void setUniqueAddress(String uniqueAddress) {
-		this.uniqueAddress = uniqueAddress;
-	}
-
-	public double getTaxAmount() {
-		return taxAmount;
+	public Date getAdditionDate() {
+		return additionDate;
 	}
 
 
-	public void setTaxAmount(double taxAmount) {
-		this.taxAmount = taxAmount;
+	public void setAdditionDate(Date additionDate) {
+		this.additionDate = additionDate;
+	}
+	// -------------------------------Other Methods------------------------------
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((transactionID == null) ? 0 : transactionID.hashCode());
+		return result;
 	}
 
-
-	public String getToAddress() {
-		return toAddress;
-	}
-
-
-	public void setToAddress(String toAddress) {
-		this.toAddress = toAddress;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transaction other = (Transaction) obj;
+		if (transactionID == null) {
+			if (other.transactionID != null)
+				return false;
+		} else if (!transactionID.equals(other.transactionID))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Transaction [transactionID=" + transactionID + ", description=" + description + ", sizeInBytes="
-				+ sizeInBytes + ", dtCreated=" + dtCreated + ", dtFinished=" + dtFinished + ", currentStatus="
-				+ currentStatus + ", taxAmount=" + taxAmount + ", toAddress=" + toAddress + ", publicAddress="
-				+ publicAddress + ", userSignature=" + userSignature + ", orderID=" + orderID + ", uniqueAddress="
-				+ uniqueAddress + "]";
+		return "Transaction [transactionID=" + transactionID + ", size=" + size + ", type=" + type + ", fee=" + fee
+				+ ", blockAddress=" + blockAddress + ", additionTime=" + additionTime + ", additionDate=" + additionDate
+				+ "]";
 	}
-	
-	
 
+	
+	
 	
 }

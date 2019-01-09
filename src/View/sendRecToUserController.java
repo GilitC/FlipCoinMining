@@ -5,7 +5,7 @@ import Control.Logic.UserLogic;
 import Exceptions.ListNotSelectedException;
 import Exceptions.MissingInputException;
 import Model.Recommendation;
-import Model.User;
+import Model.Miner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +29,7 @@ public class sendRecToUserController {
 	    private Button buttonSend;
 
 	    @FXML
-	    private ListView<User> listUsers;
+	    private ListView<Miner> listUsers;
 
 	    @FXML
 	    private ComboBox<E_Levels> comboBoxLevl;
@@ -90,7 +90,7 @@ public class sendRecToUserController {
 	        ObservableList<Recommendation> recs = FXCollections.observableArrayList(RecommendationLogic.getInstance().getRecommendation());
 	        listRecommendations.setItems(recs);
 	        
-	        ObservableList<User> userLst = FXCollections.observableArrayList(UserLogic.getInstance().getALLUsers());
+	        ObservableList<Miner> userLst = FXCollections.observableArrayList(UserLogic.getInstance().getALLUsers());
 	        listUsers.setItems(userLst);
 	        
 	        comboBoxLevl.getItems().setAll(E_Levels.values());

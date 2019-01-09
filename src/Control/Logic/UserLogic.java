@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Model.User;
+import Model.Miner;
 import Model.Consts;
 
 public class UserLogic {
@@ -26,8 +26,8 @@ public class UserLogic {
 	 * fetches all users from DB file.
 	 * @return ArrayList of users.
 	 */
-	public ArrayList<User> getALLUsers() {
-		ArrayList<User> results = new ArrayList<User>();
+	public ArrayList<Miner> getALLUsers() {
+		ArrayList<Miner> results = new ArrayList<Miner>();
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -35,7 +35,7 @@ public class UserLogic {
 					ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					int i = 1;
-					results.add(new User(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
+					results.add(new Miner(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
 							rs.getString(i++),rs.getString(i++), rs.getInt(i++)));
 				}
 			} catch (SQLException e) {
