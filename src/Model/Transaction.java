@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public abstract class Transaction {
+public class Transaction {
 
 	// -------------------------------Class  Members------------------------------
 	
