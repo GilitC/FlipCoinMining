@@ -9,14 +9,14 @@ public class Block {
 	
 	public String blockAddress;
 	public Date creationDate;
-	public Time creationHour;
+	public Date creationHour;
 	public int size;
 	public String previousBlock;
 	public String minerAddress;
 	
 	// -------------------------------Constructor------------------------------
 	
-	public Block(String blockAddress, Date creationDate, Time creationHour, int size, String previousBlock,
+	public Block(String blockAddress, Date creationDate, Date creationHour, int size, String previousBlock,
 			String minerAddress) {
 		this.blockAddress = blockAddress;
 		this.creationDate = creationDate;
@@ -48,12 +48,12 @@ public class Block {
 	}
 
 
-	public Time getCreationHour() {
+	public Date getCreationHour() {
 		return creationHour;
 	}
 
 
-	public void setCreationHour(Time creationHour) {
+	public void setCreationHour(Dates creationHour) {
 		this.creationHour = creationHour;
 	}
 

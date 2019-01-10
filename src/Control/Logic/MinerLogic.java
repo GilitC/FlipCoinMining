@@ -10,33 +10,33 @@ import java.util.ArrayList;
 import Model.Miner;
 import Model.Consts;
 
-public class UserLogic {
-	private static UserLogic _instance;
+public class MinerLogic {
+	private static MinerLogic _instance;
 
-	private UserLogic() {
+	private MinerLogic() {
 	}
 
-	public static UserLogic getInstance() {
+	public static MinerLogic getInstance() {
 		if (_instance == null)
-			_instance = new UserLogic();
+			_instance = new MinerLogic();
 		return _instance;
 	}
 
 	/**
 	 * fetches all users from DB file.
-	 * @return ArrayList of users.
+	 * @return ArrayList of miners.
 	 */
-	public ArrayList<Miner> getALLUsers() {
+	public ArrayList<Miner> getALLMiners() {
 		ArrayList<Miner> results = new ArrayList<Miner>();
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_USERS);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SEL_MINERS);
 					ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					int i = 1;
-					results.add(new Miner(rs.getString(i++), rs.getString(i++), rs.getString(i++), rs.getString(i++),
-							rs.getString(i++),rs.getString(i++), rs.getInt(i++)));
+					results.add(new Miner(rs.getString(i++), rs.getString(i++), rs.getString(i++), 
+							rs.getInt(i++),rs.getString(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -50,33 +50,27 @@ public class UserLogic {
 	/*----------------------------------------- ADD / REMOVE / UPDATE USER METHODS --------------------------------------------*/
 
 	/**
-	 * Adding a new Employee with the parameters received from the form.
+	 * Adding a new Miner with the parameters received from the form.
 	 * return true if the insertion was successful, else - return false
      * @return 
 	 */
-	public boolean addUser(String publicAddress, String userSignature,String username, String password,
-	String email, String phone, int type) {
+	public boolean addMiner(String uniqueAddress, String name, String password, int digitalProfit,
+	String email) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_USER)) {
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_INS_MINER)) {
 				
 				int i = 1;
-				stmt.setString(i++, publicAddress); // can't be null
-				stmt.setString(i++, userSignature); // can't be null
-				stmt.setString(i++, username); // can't be null
+				stmt.setString(i++, uniqueAddress); // can't be null
+				stmt.setString(i++, name); // can't be null
 				stmt.setString(i++, password); // can't be null
+				stmt.setInt(i++, digitalProfit); // can't be null
 				if (email != null)
 					stmt.setString(i++, email);
 				else
 					stmt.setNull(i++, java.sql.Types.VARCHAR);
 				
-				if (phone != null)
-					stmt.setString(i++, phone);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				
-				stmt.setInt(i++, type); // can't be null
 				stmt.executeUpdate();
 				return true;
 				
@@ -90,19 +84,18 @@ public class UserLogic {
 	}
 
 	/**
-	 * Delete the selected user in form.
+	 * Delete the selected Miner in form.
 	 * Return true if the deletion was successful, else - return false
 	 * @param userID 
      * @return boolean - if the user was removed from the DB
 	 */
-	public boolean removeUser(String publicAddress, String userSignature) {
+	public boolean removeMiner(String uniqueAddress) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_DEL_USER)) {
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_DEL_MINER)) {
 				
-				stmt.setString(1, publicAddress);
-				stmt.setString(2, userSignature);
+				stmt.setString(1, uniqueAddress);
 				stmt.executeUpdate();
 				return true;
 				
@@ -120,29 +113,25 @@ public class UserLogic {
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean editUser(String publicAddress, String userSignature,String username, String password,
-			String email, String phone, int type) {
+	public boolean editMiner(String uniqueAddress, String name, String password, int digitalProfit,
+			String email) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_USER)) {
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_MINER)) {
 				int i = 1;
 
-				stmt.setString(i++, publicAddress); // can't be null
-				stmt.setString(i++, userSignature); // can't be null
-				stmt.setString(i++, username); // can't be null
+
+				stmt.setString(i++, uniqueAddress); // can't be null
+				stmt.setString(i++, name); // can't be null
 				stmt.setString(i++, password); // can't be null
+				stmt.setInt(i++, digitalProfit); // can't be null
 				if (email != null)
 					stmt.setString(i++, email);
 				else
 					stmt.setNull(i++, java.sql.Types.VARCHAR);
 				
-				if (phone != null)
-					stmt.setString(i++, phone);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
 				
-				stmt.setInt(i++, type); // can't be null
 				stmt.executeUpdate();
 				return true;
 				

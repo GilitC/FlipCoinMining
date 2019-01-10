@@ -6,7 +6,7 @@ public class Transaction {
 
 	// -------------------------------Class  Members------------------------------
 	
-	private String transactionID;
+	private int transactionID;
 	private int size;
 	private String type; //[confirm, pay]
 	private double fee;
@@ -17,7 +17,7 @@ public class Transaction {
 	
 	// -------------------------------Constructor------------------------------
 
-	public Transaction(String transactionID, int size, String type, double fee, String blockAddress, Date additionTime,
+	public Transaction(int transactionID, int size, String type, double fee, String blockAddress, Date additionTime,
 			Date additionDate) {
 		super();
 		this.transactionID = transactionID;
@@ -31,12 +31,12 @@ public class Transaction {
 
 	// -------------------------------Getters And Setters------------------------------
 	
-	public String getTransactionID() {
+	public int getTransactionID() {
 		return transactionID;
 	}
 
 
-	public void setTransactionID(String transactionID) {
+	public void setTransactionID(int transactionID) {
 		this.transactionID = transactionID;
 	}
 
@@ -101,11 +101,20 @@ public class Transaction {
 	}
 	// -------------------------------Other Methods------------------------------
 	
+	
+
+	@Override
+	public String toString() {
+		return "Transaction [transactionID=" + transactionID + ", size=" + size + ", type=" + type + ", fee=" + fee
+				+ ", blockAddress=" + blockAddress + ", additionTime=" + additionTime + ", additionDate=" + additionDate
+				+ "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((transactionID == null) ? 0 : transactionID.hashCode());
+		result = prime * result + transactionID;
 		return result;
 	}
 
@@ -118,19 +127,9 @@ public class Transaction {
 		if (getClass() != obj.getClass())
 			return false;
 		Transaction other = (Transaction) obj;
-		if (transactionID == null) {
-			if (other.transactionID != null)
-				return false;
-		} else if (!transactionID.equals(other.transactionID))
+		if (transactionID != other.transactionID)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Transaction [transactionID=" + transactionID + ", size=" + size + ", type=" + type + ", fee=" + fee
-				+ ", blockAddress=" + blockAddress + ", additionTime=" + additionTime + ", additionDate=" + additionDate
-				+ "]";
 	}
 
 	
