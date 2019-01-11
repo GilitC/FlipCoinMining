@@ -73,7 +73,7 @@ public class TransactionLogic {
 		return results;
 	}
 	
-	/*----------------------------------------- ADD / REMOVE / UPDATE EMPLOYEE METHODS --------------------------------------------*/
+	/*----------------------------------------- ADD / REMOVE / UPDATE TRANSACTION METHODS --------------------------------------------*/
 
 	/**
 	 * Adding a new Transaction to the databse (Usually will be adding the imported transactions from FlipCoin Transfer)
@@ -105,6 +105,33 @@ public class TransactionLogic {
 					stmt.setDate(i++, new java.sql.Date(additionDate.getTime()));
 				else
 					stmt.setNull(i++, java.sql.Types.DATE);
+				stmt.executeUpdate();
+				return true;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * Update the block of an existing Transaction in the databse 
+	 * return true if the update was successful, else - return false
+     * @return 
+	 */
+	public boolean updateTransaction(int transactionID, String blockAddress) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_TRANSACTIONS_BLOCK)) {
+				
+				int i = 1;
+
+				stmt.setString(i++, blockAddress); // can't be null
+				stmt.setInt(i++, transactionID); // can't be null
 				stmt.executeUpdate();
 				return true;
 				

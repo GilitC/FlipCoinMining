@@ -60,8 +60,7 @@ public class AdminMenuController implements Initializable{
 	@FXML
 	void GoToLogin(ActionEvent event) throws IOException {
 		Stage stage = (Stage) menupane.getScene().getWindow();
-
-		//		SysData.getInstance().setUserCustomer(null);
+        SysData.getInstance().setLoggedInMiner(null);
 
 		stage.close();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/view/login.fxml"));

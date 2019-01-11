@@ -29,7 +29,7 @@ import Control.Logic.*;
 	    		d = java.sql.Date.valueOf(datepick.getValue());
 	    	
 	    	System.out.println("ProductTrans - Trying to open report");
-	    	TransactionLogic.compileTransactionsReport(d).setVisible(true);
+//	    	TransactionLogic.compileTransactionsReport(d).setVisible(true);
 	    }
 
 	

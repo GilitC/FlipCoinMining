@@ -51,7 +51,8 @@ public final class Consts {
 	}
 	 
 	public static final String SQL_ADD_TRANSACTION = "INSERT INTO TblTransaction ( transactionID, size, type, fee, blockAddress, additionTime, additionDate ) VALUES ( ? , ? , ? , ? , ? , ? , ? )";
-	
+	public static final String SQL_UPD_TRANSACTIONS_BLOCK = "UPDATE TblTransaction SET TblTransaction.blockAddress = ?, WHERE TblTransaction.transactionID=?" ;			
+
 	/*----------------------------------------- RECOMMENDATION QUERIES --------------------------------------------*/
 //	public static final String SQL_SEL_RECOMMENDATION = "SELECT * FROM TblRecommendation";
 //	

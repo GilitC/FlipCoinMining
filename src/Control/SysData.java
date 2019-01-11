@@ -19,6 +19,7 @@ public class SysData {
 	private static SysData _instance;	
 	private Connection _connection;
 	private static DBManager DB;
+	private static Miner loggedInMiner ;
 	
 	private SysData()
 	{
@@ -41,6 +42,7 @@ public class SysData {
 		if(_instance == null)
 		{
 			_instance = new SysData();
+			loggedInMiner = null;
 		}
 		return _instance;
 	}
@@ -49,5 +51,15 @@ public class SysData {
 	{
 		return _connection;
 	}
+
+	public Miner getLoggedInMiner() {
+		return loggedInMiner;
+	}
+
+	public void setLoggedInMiner(Miner loggedInMiner) {
+		SysData.loggedInMiner = loggedInMiner;
+	}
+	
+	
 
 }// ~ END OF Class SysData

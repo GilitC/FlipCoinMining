@@ -15,12 +15,15 @@ public class Miner {
 		
 
 		public Miner(String uniqueAddress, String name, String password, int digitalProfit, String email) {
-			super();
 			this.uniqueAddress = uniqueAddress;
 			this.name = name;
 			this.password = password;
 			this.digitalProfit = digitalProfit;
 			this.email = email;
+		}
+		
+		public Miner(String uniqueAddress) {
+			this.uniqueAddress = uniqueAddress;
 		}
 		
 		// -------------------------------Getters And Setters------------------------------

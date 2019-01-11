@@ -73,7 +73,7 @@ public class BlockLogic {
 		return results;
 	}
 	
-	/*----------------------------------------- ADD / REMOVE / UPDATE EMPLOYEE METHODS --------------------------------------------*/
+	/*----------------------------------------- ADD / REMOVE / UPDATE BLOCK METHODS --------------------------------------------*/
 
 //	/**
 //	 * Adding a new Transaction to the databse (Usually will be adding the imported transactions from FlipCoin Transfer)

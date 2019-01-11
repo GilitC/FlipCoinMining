@@ -3,7 +3,9 @@ package View;
 import java.io.IOException;
 import Exceptions.InvalidInputException;
 import Exceptions.MissingInputException;
+import Model.Miner;
 import Control.SysData;
+import Control.Logic.MinerLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -95,66 +97,27 @@ public class LoginController {
 				Scene scene = new Scene(root);
 				primaryStage.setScene(scene);
 				primaryStage.show();
-//			} else if (SysData.getInstance().getCustomers() != null && user.length() == Constants.ID_NUMBER_SIZE) {//if customer entered, open menu accordingly
-//				if (SysData.getInstance().getCustomers().get(user) != null) {
-//					if (SysData.getInstance().getCustomers().get(user).getPassword() != null) {
-//						if (SysData.getInstance().getCustomers().get(user).getPassword().equals(pass)) {
-//							SysData.getInstance().setUserCustomer(user);
-//							Stage stage = (Stage) login.getScene().getWindow();
-//							stage.close();
-//							FXMLLoader load = new FXMLLoader(getClass().getResource("/view/CustomerMenuSidebar.fxml"));
-//							Stage primaryStage = new Stage();
-//							Parent root = load.load();
-//							Scene scene = new Scene(root);
-//
-//							primaryStage.setScene(scene);
-//							primaryStage.show();
-//						}
-//						throw new InvalidInputException("Wrong password");
-//					}
-//				}
-//
-//			} else if (SysData.getInstance().getCoachs() != null
-//					&& SysData.getInstance().getCoachs().get(Integer.parseInt(user)) != null
-//					&& SysData.getInstance().getCoachs().get(Integer.parseInt(user)).getPassword() != null
-//					&& SysData.getInstance().getCoachs().get(Integer.parseInt(user)).getPassword().equals(pass)) {//if coach entered, open menu accordingly
-//				SysData.getInstance().setUserCoach(user);
-//				Stage stage = (Stage) login.getScene().getWindow();
-//				stage.close();
-//				FXMLLoader load = new FXMLLoader(getClass().getResource("/view/CoachMenuSidebar.fxml"));
-//				System.out.println("Want to load css -> "
-//						+ trophyMenuController.class.getResource("/view/application.css").toString());
-//
-//				Stage primaryStage = new Stage();
-//				Parent root = load.load();
-//				Scene scene = new Scene(root);
-//
-//				scene.getStylesheets()
-//						.add(trophyMenuController.class.getResource("/view/application.css").toExternalForm());
-//
-//				primaryStage.setScene(scene);
-//				primaryStage.show();
-//			} else if (SysData.getInstance().getReceptionists() != null//if receptionist entered, open menu accordingly
-//					&& SysData.getInstance().getReceptionists().get(Integer.parseInt(user)) != null
-//					&& SysData.getInstance().getReceptionists().get(Integer.parseInt(user)).getPassword() != null
-//					&& SysData.getInstance().getReceptionists().get(Integer.parseInt(user)).getPassword()
-//							.equals(pass)) {
-//				SysData.getInstance().setUserRecep(user);
-//				Stage stage = (Stage) login.getScene().getWindow();
-//				stage.close();
-//				FXMLLoader load = new FXMLLoader(getClass().getResource("/view/ReceptionistMenuSidebar.fxml"));
-//				System.out.println("Want to load css -> "
-//						+ trophyMenuController.class.getResource("/view/application.css").toString());
-//
-//				Stage primaryStage = new Stage();
-//				Parent root = load.load();
-//				Scene scene = new Scene(root);
-//
-//				scene.getStylesheets()
-//						.add(trophyMenuController.class.getResource("/view/application.css").toExternalForm());
-//
-//				primaryStage.setScene(scene);
-//				primaryStage.show();
+			} else if (!MinerLogic.getInstance().getALLMiners().isEmpty()) {//if miners exist
+				Miner mm = new Miner(user);
+				if (MinerLogic.getInstance().getALLMiners().contains(mm)) {
+					if (MinerLogic.getInstance().getALLMiners().get(MinerLogic.getInstance().getALLMiners().indexOf(mm)).getPassword() != null) {
+						if (MinerLogic.getInstance().getALLMiners().get(MinerLogic.getInstance().getALLMiners().indexOf(mm)).getPassword().equals(pass)) {
+							SysData.getInstance().setLoggedInMiner(MinerLogic.getInstance().getALLMiners().get(MinerLogic.getInstance().getALLMiners().indexOf(mm)));
+										
+							Stage stage = (Stage) login.getScene().getWindow();
+							stage.close();
+							FXMLLoader load = new FXMLLoader(getClass().getResource("/View/AdminMenuSidebar.fxml"));
+
+							Stage primaryStage = new Stage();
+							Parent root = load.load();
+							Scene scene = new Scene(root);
+							primaryStage.setScene(scene);
+							primaryStage.show();
+						}
+						throw new InvalidInputException("Wrong password. Please try again.");
+					}
+			}
+	
 			} else {//if no active user has entered, popup wrong username and password.
 				alert.setHeaderText("failed to login.");
 				alert.setContentText("wrong username/password");
@@ -176,7 +139,7 @@ public class LoginController {
 		alert.setTitle("Login");
 		alert.setHeaderText("");
 		alert.setHeaderText("Forgot Password?");
-		alert.setContentText("To reset your password, Please contact us at Admin@FlipCoinTransfer.com. Thank you!");
+		alert.setContentText("To reset your password, Please contact us at Admin@FlipCoinMining.com. Thank you!");
 		alert.show();
 	}
 

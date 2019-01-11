@@ -1,6 +1,5 @@
 package Model;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class Block {
@@ -53,7 +52,7 @@ public class Block {
 	}
 
 
-	public void setCreationHour(Dates creationHour) {
+	public void setCreationHour(Date creationHour) {
 		this.creationHour = creationHour;
 	}
 
