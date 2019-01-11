@@ -2,6 +2,8 @@ package Model;
 
 import java.io.File;
 
+import net.ucanaccess.util.Logger;
+
 /**
  * http://www.javapractices.com/topic/TopicAction.do?Id=2
  */
@@ -30,10 +32,12 @@ public final class Consts {
 	public static final String SQL_SEL_BLOCK = "SELECT * FROM TblBlock"; 
 	
 	public static String blockByMinerID(String minerAddress) {
-		String SQL_SEL_BLOCKBYMINER = "SELECT TblBlock.blockAddress, TblBlock.creationDate, TblBlock.creationHour, TblBlock.size\r\n" + 
-				"FROM TblBlock Where minerAddress =" + minerAddress;
+		String SQL_SEL_BLOCKBYMINER = "SELECT * FROM TblBlock \r\n" + 
+				"WHERE minerAddress IN (\""+minerAddress+"\")";
+		 Logger.log(SQL_SEL_BLOCKBYMINER);
 		return SQL_SEL_BLOCKBYMINER;
 	}
+	
 	
 	/*----------------------------------------- TRANSACTION QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_TRANSACTION = "SELECT * FROM TblTransaction ORDER BY TblTransaction.fee DESC"; //Order By Fee
