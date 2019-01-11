@@ -114,17 +114,17 @@ public class LoginController {
 							primaryStage.setScene(scene);
 							primaryStage.show();
 						}
-						throw new InvalidInputException("Wrong password. Please try again.");
+						else
+							throw new InvalidInputException("Wrong password. Please try again.");
 					}
 			}
-	
 			} else {//if no active user has entered, popup wrong username and password.
-				alert.setHeaderText("failed to login.");
+				alert.setHeaderText("Failed to login.");
 				alert.setContentText("wrong username/password");
 				alert.show();
 			}
 		}catch(NumberFormatException e) {//catch exception if trying to convert string to integer
-			new InvalidInputException("numbers only in this field please");
+			new InvalidInputException("Numbers only in this field please");
 		}catch(InvalidInputException e) {
 			
 		}catch(MissingInputException e) {
