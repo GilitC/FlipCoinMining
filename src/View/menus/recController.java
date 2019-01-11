@@ -29,7 +29,7 @@ public class recController {
 	     */
 	    @FXML
 	    void goToAddRec(ActionEvent event) {
-	    	WindowManager.openWindow(NameToWindow.ADD_RECOMMENDATION);
+//	    	WindowManager.openWindow(NameToWindow.ADD_RECOMMENDATION);
 	    }
 
 	    /**
@@ -38,7 +38,7 @@ public class recController {
 	     */
 	    @FXML
 	    void goToSendToUsers(ActionEvent event) {
-	    	WindowManager.openWindow(NameToWindow.SEND_REC_TO_USER);
+//	    	WindowManager.openWindow(NameToWindow.SEND_REC_TO_USER);
 	    }
 
 	    /**
@@ -47,7 +47,7 @@ public class recController {
 	     */
 	    @FXML
 	    void goToUpdRed(ActionEvent event) {
-	    	WindowManager.openWindow(NameToWindow.UPDATE_RECOMMENDATIONS);
+//	    	WindowManager.openWindow(NameToWindow.UPDATE_RECOMMENDATIONS);
 	    }
 
 	    /**
@@ -56,7 +56,7 @@ public class recController {
 	     */
 	    @FXML
 	    void goToViewRecs(ActionEvent event) {
-	    	WindowManager.openWindow(NameToWindow.VIEW_RECOMMENDATIONS);
+//	    	WindowManager.openWindow(NameToWindow.VIEW_RECOMMENDATIONS);
 	    }
 	
 }

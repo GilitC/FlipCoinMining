@@ -53,7 +53,7 @@ public class AdminMenuController implements Initializable{
 
     @FXML
     void GoToAddTransToBlock(ActionEvent event) {
-    	loadUI(NameToWindow.WELCOMESCREEN);
+    	loadUI(NameToWindow.MENU_ADDTRANSTOBLOCK);
     }
 
 
