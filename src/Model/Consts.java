@@ -21,6 +21,10 @@ public final class Consts {
 			"lib\\hsqldb.jar",
 			"lib\\jackcess-2.1.10.jar"
 	};
+	
+    public enum Manipulation {
+    	UPDATE, INSERT, DELETE;
+    }
 
 	/*----------------------------------------- USER QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_MINERS = "SELECT * FROM TblMiner";
@@ -43,6 +47,18 @@ public final class Consts {
 	
 	/*----------------------------------------- TRANSACTION QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_TRANSACTION = "SELECT * FROM TblTransaction ORDER BY TblTransaction.fee DESC"; //Order By Fee
+	
+	public static final String SQL_SEL_TRANSACTIONTOEXPORT = "SELECT *\r\n" + 
+			"FROM tblTransaction\r\n" + 
+			"WHERE tblTransaction.blockAddress Is Not Null\r\n" + 
+			"ORDER BY tblTransaction.fee DESC\r\n" + 
+			""; //Transactions to export are those who where placed into a block
+	
+	public static final String SQL_SEL_TRANSACTION_NULLBLOCK = "SELECT *\r\n" + 
+			"FROM tblTransaction\r\n" + 
+			"WHERE tblTransaction.blockAddress Is Null\r\n" + 
+			"ORDER BY tblTransaction.fee DESC\r\n" + 
+			""; //show transactions who are not chosen yet
 	
 	public static String transBYBlock(String blockAddress) {
 		String SQL_SEL_TRANSBYBLOCKA= "SELECT * FROM TblTransaction\r\n" + 
