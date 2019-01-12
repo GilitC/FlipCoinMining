@@ -33,8 +33,7 @@ import org.w3c.dom.Element;
 
 import Model.Consts;
 import Model.Transaction;
-import model.Customer;
-import model.Consts.Manipulation;
+import Model.Consts.Manipulation;
 
 public class TransactionLogic {
 	private static TransactionLogic _instance;
@@ -191,13 +190,13 @@ public class TransactionLogic {
     					(String) obj.get("blockAddress"),
     					(Date) obj.get("additionTime"), 
     					(Date) obj.get("additionDate");
-    			if (!manipulateCustomer(c, Manipulation.INSERT) && 
-						!manipulateCustomer(c, Manipulation.UPDATE))
+    			if (!manipulateTx(c, Manipulation.INSERT) && 
+						!manipulateTx(c, Manipulation.UPDATE))
 					errors++;
     		}
     		
-			System.out.println((errors == 0) ? "customers data imported successfully!" : 
-				String.format("customers data imported with %d errors!", errors));
+			System.out.println((errors == 0) ? "transactions data imported successfully!" : 
+				String.format("transactions data imported with %d errors!", errors));
     	} catch (IOException | DeserializationException e) {
     		e.printStackTrace();
     	}
@@ -209,17 +208,17 @@ public class TransactionLogic {
      * @param manipulation manipulation type.
      * @return success or failure.
      */
-    public boolean manipulateCustomer(Customer c, Manipulation manipulation) {
+    public boolean manipulateTx(Transaction c, Manipulation manipulation) {
     	try {
     		Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
     		try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
     				CallableStatement stmt = conn.prepareCall(
     						(manipulation.equals(Manipulation.UPDATE)) ? 
-    								Consts.UPDATE_CUSTOMER : 
+    								Consts.SQL_UPD_TRANSACTIONS_BLOCK : 
     									(manipulation.equals(Manipulation.INSERT)) ? 
-    											Consts.INSERT_CUSTOMER : 
-    												Consts.DELETE_CUSTOMER)) {
-    			allocateCustomerParams(stmt, c, manipulation);
+    											Consts.SQL_ADD_TRANSACTION : 
+    												Consts.SQL_ADD_TRANSACTION)) { //
+    			allocateTransactionParams(stmt, c, manipulation);
     			stmt.executeUpdate();
     			return true;
     		} catch (SQLException e) {
@@ -233,61 +232,33 @@ public class TransactionLogic {
     }
     
     /**
-     * fills statement's placeholders with customer's field values.
+     * fills statement's placeholders with transcation's field values.
      * @param stmt statement object.
-     * @param c customer.
+     * @param tx customer.
      * @param m manipulation type.
      * @throws SQLException
      */
-    private void allocateCustomerParams(CallableStatement stmt, Customer c, Manipulation m) throws SQLException {
+    private void allocateTransactionParams(CallableStatement stmt, Transaction tx, Manipulation m) throws SQLException {
     	int i = 1;
     	
     	if (!m.equals(Manipulation.UPDATE)) {
-    		stmt.setString(i++, c.getCustomerID());
+    		stmt.setInt(i++, tx.getTransactionID());
     		
     		if (m.equals(Manipulation.DELETE))
     			return;
     	}
     	
-    	stmt.setString(i++, c.getCompanyName());
+		stmt.setInt(i++, tx.getTransactionID()); // can't be null
+		stmt.setInt(i++, tx.getSize()); // can't be null
+		stmt.setString(i++, tx.getType()); // can't be null
+		stmt.setDouble(i++, tx.getFee()); // can't be null
+		stmt.setString(i++, tx.getBlockAddress()); // can't be null
+
+		stmt.setDate(i++, new java.sql.Date(tx.getAdditionTime()));
+		stmt.setDate(i++, new java.sql.Date(tx.getAdditionDate()));
     	
-    	if (c.getContactName() == null)
-    		stmt.setNull(i++, java.sql.Types.VARCHAR);
-    	else
-    		stmt.setString(i++, c.getContactName());
-    	
-    	if (c.getContactTitle() == null)
-    		stmt.setNull(i++, java.sql.Types.VARCHAR);
-    	else
-    		stmt.setString(i++, c.getContactTitle());
-    	
-    	if (c.getAddress() == null)
-    		stmt.setNull(i++, java.sql.Types.VARCHAR);
-    	else
-    		stmt.setString(i++, c.getAddress());
-    	
-    	if (c.getCity() == null)
-    		stmt.setNull(i++, java.sql.Types.VARCHAR);
-    	else
-    		stmt.setString(i++, c.getCity());
-    	
-    	if (c.getCountry() == null)
-    		stmt.setNull(i++, java.sql.Types.VARCHAR);
-    	else
-    		stmt.setString(i++, c.getCountry());
-    	
-    	if (c.getPhone() == null)
-    		stmt.setNull(i++, java.sql.Types.VARCHAR);
-    	else
-    		stmt.setString(i++, c.getPhone());
-    	
-    	if (c.getFax() == null)
-    		stmt.setNull(i++, java.sql.Types.VARCHAR);
-    	else
-    		stmt.setString(i++, c.getFax());
-    	
-    	if (m.equals(Manipulation.UPDATE))
-    		stmt.setString(i, c.getCustomerID());
+    	//if (m.equals(Manipulation.UPDATE))
+    	//	stmt.setString(i, c.getCustomerID());
     }
 	/*----------------------------------------- ADD / REMOVE / UPDATE TRANSACTION METHODS --------------------------------------------*/
 
