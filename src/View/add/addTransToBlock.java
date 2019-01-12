@@ -66,8 +66,8 @@ public class addTransToBlock {
 			Double newProfit = SysData.getInstance().getLoggedInMiner().getDigitalProfit() + transactionfee;
 			String minerAddress = SysData.getInstance().getLoggedInMiner().getUniqueAddress();
 			
-			if (TransactionLogic.getInstance().updateTransaction(transactionID, blockAddress)
-					 && MinerLogic.getInstance().updateMinerDigitalProfit(minerAddress, newProfit)) {
+			if (TransactionLogic.getInstance().updateTransaction(blockAddress, transactionID)
+					 && MinerLogic.getInstance().updateMinerDigitalProfit(newProfit, minerAddress)) {
 				alert.setHeaderText("Success");
 				alert.setContentText("Added Transaction To Block succesfully!");
 				alert.show();			

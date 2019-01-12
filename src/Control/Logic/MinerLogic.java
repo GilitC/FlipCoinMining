@@ -149,7 +149,7 @@ public class MinerLogic {
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean updateMinerDigitalProfit(String uniqueAddress, double digitalProfit) {
+	public boolean updateMinerDigitalProfit(double digitalProfit, String uniqueAddress) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);

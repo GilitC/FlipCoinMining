@@ -122,7 +122,7 @@ public class TransactionLogic {
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean updateTransaction(int transactionID, String blockAddress) {
+	public boolean updateTransaction(String blockAddress, int transactionID) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
