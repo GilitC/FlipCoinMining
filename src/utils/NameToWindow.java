@@ -10,7 +10,7 @@ public enum NameToWindow {
 	/*------------MENUS-------------------------------------------------*/
 	MENU_IMPORT("menus/reportsMenu"),
 	MENU_EXPORT("menus/products"),
-	MENU_VIEWRECOMMENDEDTRANS("menus/users"),
+	MENU_VIEWRECOMMENDEDTRANS("recommendedPairsReport"),
 	MENU_ADDTRANSTOBLOCK("add/addTransToBlock"),
 	MENU_VIEW("menus/recMenu"),
 	QUERIES("menus/queries");

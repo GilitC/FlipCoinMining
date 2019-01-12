@@ -48,7 +48,7 @@ public class AdminMenuController implements Initializable{
 
     @FXML
     void GoToVIewTransRep(ActionEvent event) {
-    	loadUI(NameToWindow.WELCOMESCREEN);
+    	loadUI(NameToWindow.MENU_VIEWRECOMMENDEDTRANS);
     }
 
     @FXML

@@ -38,7 +38,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToVIewTransRep" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="View Transaction Report">
+            <Button mnemonicParsing="false" onAction="#GoToVIewTransRep" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="Recommend Pair Report">
                <effect>
                   <Glow />
                </effect>
@@ -48,12 +48,12 @@
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="---">
+            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Import to FCM">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="---">
+            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Export to FCT">
                <effect>
                   <Glow />
                </effect>
