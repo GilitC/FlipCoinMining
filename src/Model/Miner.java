@@ -7,14 +7,14 @@ public class Miner {
 		private String uniqueAddress;
 		private String name;	
 		private String password;
-		private int digitalProfit; 
+		private double digitalProfit; 
 		private String email;
 
 
 		// -------------------------------Constructor------------------------------
 		
 
-		public Miner(String uniqueAddress, String name, String password, int digitalProfit, String email) {
+		public Miner(String uniqueAddress, String name, String password, double digitalProfit, String email) {
 			this.uniqueAddress = uniqueAddress;
 			this.name = name;
 			this.password = password;
@@ -52,11 +52,11 @@ public class Miner {
 			this.password = password;
 		}
 
-		public int getDigitalProfit() {
+		public double getDigitalProfit() {
 			return digitalProfit;
 		}
 
-		public void setDigitalProfit(int digitalProfit) {
+		public void setDigitalProfit(double digitalProfit) {
 			this.digitalProfit = digitalProfit;
 		}
 

@@ -36,7 +36,7 @@ public class MinerLogic {
 				while (rs.next()) {
 					int i = 1;
 					results.add(new Miner(rs.getString(i++), rs.getString(i++), rs.getString(i++), 
-							rs.getInt(i++),rs.getString(i++)));
+							rs.getDouble(i++),rs.getString(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -54,7 +54,7 @@ public class MinerLogic {
 	 * return true if the insertion was successful, else - return false
      * @return 
 	 */
-	public boolean addMiner(String uniqueAddress, String name, String password, int digitalProfit,
+	public boolean addMiner(String uniqueAddress, String name, String password, double digitalProfit,
 	String email) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -65,7 +65,7 @@ public class MinerLogic {
 				stmt.setString(i++, uniqueAddress); // can't be null
 				stmt.setString(i++, name); // can't be null
 				stmt.setString(i++, password); // can't be null
-				stmt.setInt(i++, digitalProfit); // can't be null
+				stmt.setDouble(i++, digitalProfit); // can't be null
 				if (email != null)
 					stmt.setString(i++, email);
 				else
@@ -109,11 +109,11 @@ public class MinerLogic {
 	}
 	
 	/**
-	 * Editing a exist employee with the parameters received from the form.
+	 * Editing a exist miner with the parameters received from the form.
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean editMiner(String uniqueAddress, String name, String password, int digitalProfit,
+	public boolean editMiner(String uniqueAddress, String name, String password, double digitalProfit,
 			String email) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -125,12 +125,39 @@ public class MinerLogic {
 				stmt.setString(i++, uniqueAddress); // can't be null
 				stmt.setString(i++, name); // can't be null
 				stmt.setString(i++, password); // can't be null
-				stmt.setInt(i++, digitalProfit); // can't be null
+				stmt.setDouble(i++, digitalProfit); // can't be null
 				if (email != null)
 					stmt.setString(i++, email);
 				else
 					stmt.setNull(i++, java.sql.Types.VARCHAR);
 				
+				
+				stmt.executeUpdate();
+				return true;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * Editing a exist miner with the parameters received from the form.
+	 * return true if the update was successful, else - return false
+     * @return 
+	 */
+	public boolean updateMinerDigitalProfit(String uniqueAddress, double digitalProfit) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_MINER_PROFIT)) {
+				int i = 1;
+
+				stmt.setDouble(i++, digitalProfit); // can't be null
+				stmt.setString(i++, uniqueAddress); // can't be null
 				
 				stmt.executeUpdate();
 				return true;

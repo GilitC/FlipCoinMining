@@ -7,6 +7,7 @@ import java.util.ListIterator;
 
 import Control.SysData;
 import Control.Logic.BlockLogic;
+import Control.Logic.MinerLogic;
 import Exceptions.ListNotSelectedException;
 import Model.Transaction;
 import Model.Block;
@@ -61,7 +62,12 @@ public class addTransToBlock {
 			String blockAddress = comboBoxBlock.getSelectionModel().getSelectedItem().getBlockAddress();
 			Integer transactionID = listTransactions.getSelectionModel().getSelectedItem().getTransactionID();
 			
-			if (TransactionLogic.getInstance().updateTransaction(transactionID, blockAddress)) {
+			Double transactionfee = listTransactions.getSelectionModel().getSelectedItem().getFee();
+			Double newProfit = SysData.getInstance().getLoggedInMiner().getDigitalProfit() + transactionfee;
+			String minerAddress = SysData.getInstance().getLoggedInMiner().getUniqueAddress();
+			
+			if (TransactionLogic.getInstance().updateTransaction(transactionID, blockAddress)
+					 && MinerLogic.getInstance().updateMinerDigitalProfit(minerAddress, newProfit)) {
 				alert.setHeaderText("Success");
 				alert.setContentText("Added Transaction To Block succesfully!");
 				alert.show();			

@@ -27,6 +27,8 @@ public final class Consts {
 	public static final String SQL_DEL_MINER = "{ call qryDelMiner(?) }";
 	public static final String SQL_INS_MINER = "{ call qryInsMiner(?,?,?,?,?) }";
 	public static final String SQL_UPD_MINER = "{ call qryUpdMiner(?,?,?,?,?) }";
+	
+	public static final String SQL_UPD_MINER_PROFIT = "UPDATE TblMiner SET TblMiner.digitalProfit = ?, WHERE TblMiner.uniqueAddress='?'" ;	
 
 	/*----------------------------------------- BLOCK QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_BLOCK = "SELECT * FROM TblBlock"; 
@@ -44,7 +46,7 @@ public final class Consts {
 	
 	public static String transBYBlock(String blockAddress) {
 		String SQL_SEL_TRANSBYBLOCKA= "SELECT * FROM TblTransaction\r\n" + 
-				" Where blockAddress =" + blockAddress;
+				" Where blockAddress IN (\""+blockAddress+"\")";
 		return SQL_SEL_TRANSBYBLOCKA;
 	}
 	
@@ -55,7 +57,7 @@ public final class Consts {
 	}
 	 
 	public static final String SQL_ADD_TRANSACTION = "INSERT INTO TblTransaction ( transactionID, size, type, fee, blockAddress, additionTime, additionDate ) VALUES ( ? , ? , ? , ? , ? , ? , ? )";
-	public static final String SQL_UPD_TRANSACTIONS_BLOCK = "UPDATE TblTransaction SET TblTransaction.blockAddress = ?, WHERE TblTransaction.transactionID=?" ;			
+	public static final String SQL_UPD_TRANSACTIONS_BLOCK = "UPDATE TblTransaction SET TblTransaction.blockAddress = '?', WHERE TblTransaction.transactionID=?" ;			
 
 	/*----------------------------------------- RECOMMENDATION QUERIES --------------------------------------------*/
 //	public static final String SQL_SEL_RECOMMENDATION = "SELECT * FROM TblRecommendation";
