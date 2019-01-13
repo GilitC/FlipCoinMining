@@ -189,7 +189,7 @@ public class TransactionLogic {
     					(double) obj.get("fee"), 
     					(String) obj.get("blockAddress"),
     					(Date) obj.get("additionTime"), 
-    					(Date) obj.get("additionDate");
+    					(Date) obj.get("additionDate"));
     			if (!manipulateTx(c, Manipulation.INSERT) && 
 						!manipulateTx(c, Manipulation.UPDATE))
 					errors++;
@@ -254,8 +254,10 @@ public class TransactionLogic {
 		stmt.setDouble(i++, tx.getFee()); // can't be null
 		stmt.setString(i++, tx.getBlockAddress()); // can't be null
 
-		stmt.setDate(i++, new java.sql.Date(tx.getAdditionTime()));
-		stmt.setDate(i++, new java.sql.Date(tx.getAdditionDate()));
+		java.sql.Date sqlDate = new java.sql.Date(tx.getAdditionTime().getTime());
+		
+		stmt.setDate(i++, sqlDate);
+		stmt.setDate(i++, sqlDate);
     	
     	//if (m.equals(Manipulation.UPDATE))
     	//	stmt.setString(i, c.getCustomerID());
