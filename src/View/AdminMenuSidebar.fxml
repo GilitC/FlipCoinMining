@@ -48,12 +48,12 @@
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Import to FCM">
+            <Button mnemonicParsing="false" onAction="#GoToImporttoFCM" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Import to FCM">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToHomePage" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Export to FCT">
+            <Button mnemonicParsing="false" onAction="#GoToExporttoFCT" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Export to FCT">
                <effect>
                   <Glow />
                </effect>
