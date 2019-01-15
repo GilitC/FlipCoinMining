@@ -28,6 +28,17 @@ public class Transaction {
 		this.additionTime = additionTime;
 		this.additionDate = additionDate;
 	}
+	
+	public Transaction(int transactionID, int size, String type, double fee, String blockAddress) {
+		super();
+		this.transactionID = transactionID;
+		this.size = size;
+		this.type = type;
+		this.fee = fee;
+		this.blockAddress = blockAddress;
+		this.additionTime = new Date();
+		this.additionDate =new Date();
+	}
 
 	// -------------------------------Getters And Setters------------------------------
 	

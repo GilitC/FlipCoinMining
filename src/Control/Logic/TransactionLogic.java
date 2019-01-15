@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -161,98 +162,88 @@ public class TransactionLogic {
             e.printStackTrace();
         }
     }
-//    
-//	/**
-//	 * imports transactions from json to db.
-//	 * @param path json filepath.
-//	 */
-//    public void importTransactionsFromJSON(String path) {
-//    	try (FileReader reader = new FileReader(new File(path))) {
-//    		JsonObject doc = (JsonObject) Jsoner.deserialize(reader);
-//    		JsonArray txs = (JsonArray) doc.get("Txs_info");
-//    		Iterator<Object> iterator = txs.iterator();
-//    		int errors = 0;
-//    		while (iterator.hasNext()) {
-//    			JsonObject obj = (JsonObject) iterator.next();
-//    			Transaction c = new Transaction((int) obj.get("transactionID"),
-//    					(int) obj.get("size"), 
-//    					(String) obj.get("type"),
-//    					(double) obj.get("fee"), 
-//    					(String) obj.get("blockAddress"),
-//    					(Date) obj.get("additionTime"), 
-//    					(Date) obj.get("additionDate"));
-//    			if (!manipulateTx(c, Manipulation.INSERT) && 
-//						!manipulateTx(c, Manipulation.UPDATE))
-//					errors++;
-//    		}
-//    		
-//			System.out.println((errors == 0) ? "transactions data imported successfully!" : 
-//				String.format("transactions data imported with %d errors!", errors));
-//    	} catch (IOException | DeserializationException e) {
-//    		e.printStackTrace();
-//    	}
-//    }
-//
-//    /**
-//     * performs data manipulation in db on given customer.
-//     * @param c customer to be manipulated.
-//     * @param manipulation manipulation type.
-//     * @return success or failure.
-//     */
-//    public boolean manipulateTx(Transaction c, Manipulation manipulation) {
-//    	try {
-//    		Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-//    		try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-//    				CallableStatement stmt = conn.prepareCall(
-//    						(manipulation.equals(Manipulation.UPDATE)) ? 
-//    								Consts.SQL_UPD_TRANSACTIONS_BLOCK : 
-//    									(manipulation.equals(Manipulation.INSERT)) ? 
-//    											Consts.SQL_ADD_TRANSACTION : 
-//    												Consts.SQL_ADD_TRANSACTION)) { //
-//    			allocateTransactionParams(stmt, c, manipulation);
-//    			stmt.executeUpdate();
-//    			return true;
-//    		} catch (SQLException e) {
-////    			e.printStackTrace();
-//    		}
-//    	} catch (ClassNotFoundException e) {
-////    		e.printStackTrace();
-//    	}
-//    	
-//    	return false;
-//    }
-//    
-//    /**
-//     * fills statement's placeholders with transcation's field values.
-//     * @param stmt statement object.
-//     * @param tx customer.
-//     * @param m manipulation type.
-//     * @throws SQLException
-//     */
-//    private void allocateTransactionParams(CallableStatement stmt, Transaction tx, Manipulation m) throws SQLException {
-//    	int i = 1;
-//    	
-//    	if (!m.equals(Manipulation.UPDATE)) {
-//    		stmt.setInt(i++, tx.getTransactionID());
-//    		
-//    		if (m.equals(Manipulation.DELETE))
-//    			return;
-//    	}
-//    	
-//		stmt.setInt(i++, tx.getTransactionID()); // can't be null
-//		stmt.setInt(i++, tx.getSize()); // can't be null
-//		stmt.setString(i++, tx.getType()); // can't be null
-//		stmt.setDouble(i++, tx.getFee()); // can't be null
-//		stmt.setString(i++, tx.getBlockAddress()); // can't be null
-//
-//		java.sql.Date sqlDate = new java.sql.Date(tx.getAdditionTime().getTime());
-//		
-//		stmt.setDate(i++, sqlDate);
-//		stmt.setDate(i++, sqlDate);
-//    	
-//    	//if (m.equals(Manipulation.UPDATE))
-//    	//	stmt.setString(i, c.getCustomerID());
-//    }
+    
+	/**
+	 * imports transactions from json to db.
+	 * @param path json filepath.
+	 */
+    public void importTransactionsFromJSON(String path) {
+    	try (FileReader reader = new FileReader(new File(path))) {
+    		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    		JsonObject doc = (JsonObject) Jsoner.deserialize(reader);
+    		JsonArray txs = (JsonArray) doc.get("Txs_info");
+    		Iterator<Object> iterator = txs.iterator();
+    		int errors = 0;
+    		while (iterator.hasNext()) {
+    			JsonObject obj = (JsonObject) iterator.next();
+    			Transaction c = new Transaction(Integer.parseInt(obj.get("transactionID").toString()),
+    					Integer.parseInt(obj.get("size").toString()), 
+    					(String) obj.get("type"),
+    					Double.parseDouble( obj.get("fee").toString()), 
+    					(String) obj.get("blockAddress"));
+    			if (!manipulateTx(c, Manipulation.INSERT) && 
+						!manipulateTx(c, Manipulation.UPDATE))
+					errors++;
+    		}
+    		
+			System.out.println((errors == 0) ? "transactions data imported successfully!" : 
+				String.format("transactions data imported with %d errors!", errors));
+    	} catch (IOException | DeserializationException e) {
+    		e.printStackTrace();
+    	}
+    }
+
+    /**
+     * performs data manipulation in db on given customer.
+     * @param c customer to be manipulated.
+     * @param manipulation manipulation type.
+     * @return success or failure.
+     */
+    public boolean manipulateTx(Transaction c, Manipulation manipulation) {
+    	try {
+    		Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+    		try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+    				CallableStatement stmt = conn.prepareCall(
+    						(manipulation.equals(Manipulation.UPDATE)) ? 
+    								Consts.SQL_UPD_TRANSACTIONS_BLOCK : 
+    									(manipulation.equals(Manipulation.INSERT)) ? 
+    											Consts.SQL_ADD_TRANSACTION : 
+    												Consts.SQL_ADD_TRANSACTION)) { //
+    			allocateTransactionParams(stmt, c);
+    			stmt.executeUpdate();
+    			return true;
+    		} catch (SQLException e) {
+    			e.printStackTrace();
+    		}
+    	} catch (ClassNotFoundException e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return false;
+    }
+    
+    /**
+     * fills statement's placeholders with transcation's field values.
+     * @param stmt statement object.
+     * @param tx customer.
+     * @param m manipulation type.
+     * @throws SQLException
+     */
+    private void allocateTransactionParams(CallableStatement stmt, Transaction tx) throws SQLException {
+    	int i = 1;
+    	
+    	stmt.setInt(i++, tx.getTransactionID());
+		stmt.setInt(i++, tx.getSize()); // can't be null
+		stmt.setString(i++, tx.getType()); // can't be null
+		stmt.setDouble(i++, tx.getFee()); // can't be null
+		stmt.setString(i++, null); // Set the default block address to null
+
+		java.sql.Date sqlDate = new java.sql.Date(tx.getAdditionTime().getTime());
+		
+		stmt.setDate(i++, sqlDate);
+		stmt.setDate(i++, sqlDate);
+
+    }
 	/*----------------------------------------- ADD / REMOVE / UPDATE TRANSACTION METHODS --------------------------------------------*/
 
 	/**

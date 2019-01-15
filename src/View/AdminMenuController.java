@@ -53,14 +53,14 @@ public class AdminMenuController implements Initializable{
 	@FXML
 	private void GoToImporttoFCM(ActionEvent event) {
 		loadUI(NameToWindow.WELCOMESCREEN);
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//		alert.setTitle("Import");
-//		alert.setHeaderText("");
-//
-//		TransactionLogic.getInstance().importTransactionsFromJSON("json/txs.json");
-//		alert.setHeaderText("Success");
-//		alert.setContentText("Imported Transactions From JSON Successfully!");
-//		alert.show();			
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Import");
+		alert.setHeaderText("");
+
+		TransactionLogic.getInstance().importTransactionsFromJSON("json/txs.json");
+		alert.setHeaderText("Success");
+		alert.setContentText("Imported Transactions From JSON Successfully!");
+		alert.show();			
 	}
 	
 	@FXML

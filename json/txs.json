@@ -6,8 +6,6 @@
 			"type":"confirm",
 			"fee":"12",
 			"blockAddress":"",
-			"additionTime":"10:30",
-			"additionDate":"13/01/19",
 		},
 		{
 			"transactionID":"7",
@@ -15,8 +13,6 @@
 			"type":"pay",
 			"fee":"11",
 			"blockAddress":"",
-			"additionTime":"10:30",
-			"additionDate":"13/01/19",
 		},
 		{
 			"transactionID":"8",
@@ -24,8 +20,6 @@
 			"type":"confirm",
 			"fee":"10",
 			"blockAddress":"",
-			"additionTime":"10:30",
-			"additionDate":"13/01/19",
 		},
 		{
 			"transactionID":"9",
@@ -33,8 +27,6 @@
 			"type":"pay",
 			"fee":"10",
 			"blockAddress":"",
-			"additionTime":"10:30",
-			"additionDate":"13/01/19",
 		},]
 }
 	
