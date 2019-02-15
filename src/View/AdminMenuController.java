@@ -82,7 +82,7 @@ public class AdminMenuController implements Initializable{
 
 	@FXML
 	void GoToAddBonus(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
+		loadUI(NameToWindow.ADD_BONUS);
 	}
 
 	@FXML

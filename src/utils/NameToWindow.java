@@ -11,6 +11,7 @@ public enum NameToWindow {
 	MENU_IMPORT("menus/reportsMenu"),
 	MENU_EXPORT("menus/products"),
 	ADD_LOTTERY("add/addLottery"),
+	ADD_BONUS("add/addBonus"),
 
 	
 	/*------------MENUS USER-------------------------------------------------*/
