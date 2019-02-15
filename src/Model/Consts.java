@@ -83,18 +83,14 @@ public final class Consts {
 	public static final String SQL_ADD_BONUS = "INSERT INTO tblBonus ( description ) VALUES ( ? )";
 	
 	
-	/*----------------------------------------- RECOMMENDATION QUERIES --------------------------------------------*/
-//public static final String SQL_SEL_RECOMMENDATION = "SELECT * FROM TblRecommendation";
-//	
-//	public static String usersByRecc(int recID) {
-//		String SQL_SEL_USERSBYRECID = "SELECT TblUserGetRecommendation.levelOfImportance, TblUserGetRecommendation.publicAddress, TblUserGetRecommendation.userSignature, TblUserGetRecommendation.recommendId\r\n" + 
-//				"FROM TblUserGetRecommendation Where recommendId =" + recID;
-//		return SQL_SEL_USERSBYRECID;
-//	}
-//	
-//	public static final String SQL_UPD_RECOMMENDATION = "UPDATE TblRecommendation SET TblRecommendation.dateCreated = ?, TblRecommendation.chanceChosen = ?, TblRecommendation.amountTaxRecommended = ?, TblRecommendation.publicAddress = ?, TblRecommendation.userSignature = ? WHERE TblRecommendation.recommendId=?" ;			
-//	public static final String SQL_ADD_RECOMMENDATION = "INSERT INTO TblRecommendation ( dateCreated, chanceChosen, amountTaxRecommended, publicAddress, userSignature ) VALUES ( ? , ? , ? , ? , ? )";
-//	public static final String SQL_SENDRECTOUSER = "INSERT INTO TblUserGetRecommendation ( levelOfImportance, publicAddress, userSignature, recommendId ) VALUES ( ? , ? , ? , ? )";
+	/*----------------------------------------- RIDDLE QUERIES --------------------------------------------*/
+	public static final String SQL_SEL_RIDDLES = "SELECT * FROM tblRiddle";
+	public static final String SQL_SEL_RIDDLELEVELS = "SELECT * FROM tblRiddleLevel";
+
+	public static final String SQL_UPD_RIDDLE_LEVEL = "UPDATE tblRiddle SET tblRiddle.riddleLevel = ? WHERE tblRiddle.riddleNumber=?" ;				
+	public static final String SQL_UPD_RIDDLE_STATUS = "UPDATE tblRiddle SET tblRiddle.status = ? WHERE tblRiddle.riddleNumber=?" ;			
+	public static final String SQL_ADD_RIDDLE = "INSERT INTO tblRiddle ( publishTime, publishDate, description, solutionTime, status, riddleLevel ) VALUES ( ? , ? , ? , ? , ? , ? )";
+	//public static final String SQL_SENDRECTOUSER = "INSERT INTO TblUserGetRecommendation ( levelOfImportance, publicAddress, userSignature, recommendId ) VALUES ( ? , ? , ? , ? )";
 
 
 	/*----------------------------------------- MORE QUERIES ----------------------------------------------*/
