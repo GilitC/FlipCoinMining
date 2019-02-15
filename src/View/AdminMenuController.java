@@ -87,7 +87,7 @@ public class AdminMenuController implements Initializable{
 
 	@FXML
 	void GoToEditRiddleLvl(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
+		loadUI(NameToWindow.EDIT_RIDDLE);
 	}
 
 

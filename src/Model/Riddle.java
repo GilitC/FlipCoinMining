@@ -105,7 +105,7 @@ public class Riddle {
 	@Override
 	public String toString() {
 		return "Riddle Number " + riddleNumber + ", published at " + publishTime + ", On "
-				+ publishDate + ", DeadLine: " + solutionTime + "Description: " + description+ "Level: " + riddleLevel + "Status: " +status;
+				+ publishDate + ", DeadLine: " + solutionTime + " Description: " + description+ " Level: " + riddleLevel + " Status: " +status;
 	}
 	
 	

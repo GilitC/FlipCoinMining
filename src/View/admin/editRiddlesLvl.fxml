@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="addReco" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.admin.editRiddlesLvlController">
+   <children>
+      <ImageView fitHeight="590.0" fitWidth="701.0" layoutX="8.0" style="-fx-opacity: 0.2;">
+         <image>
+            <Image url="@../../../bin/bg.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="back" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Label layoutX="263.0" layoutY="35.0" style="-fx-opacity: 0.8;" text="Edit Riddle's Level" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="numberRiddle" alignment="CENTER" editable="false" layoutX="268.0" layoutY="125.0" prefHeight="25.0" prefWidth="181.0" promptText="Riddle Number" style="-fx-opacity: 0.6;" />
+      <TextField fx:id="pbtime" alignment="CENTER" editable="false" layoutX="268.0" layoutY="164.0" prefHeight="25.0" prefWidth="181.0" promptText="Publish Time" style="-fx-opacity: 0.6;" />
+      <TextField fx:id="pbdate" alignment="CENTER" editable="false" layoutX="268.0" layoutY="211.0" prefHeight="26.0" prefWidth="181.0" promptText="Publish Date" style="-fx-opacity: 0.6;" />
+      <TextField fx:id="solutiontm" alignment="CENTER" editable="false" layoutX="268.0" layoutY="342.0" prefHeight="25.0" prefWidth="181.0" promptText="Solution Time" style="-fx-opacity: 0.6;" />
+      <TextField fx:id="riddleStatus" alignment="CENTER" editable="false" layoutX="268.0" layoutY="384.0" prefHeight="25.0" prefWidth="181.0" promptText="Status" style="-fx-opacity: 0.6;" />
+      <ComboBox fx:id="comboLevel" layoutX="268.0" layoutY="433.0" prefHeight="26.0" prefWidth="181.0" promptText="Riddle Level" />
+      <Button fx:id="saveButton" layoutX="271.0" layoutY="511.0" mnemonicParsing="false" onAction="#saveProduct" prefHeight="33.0" prefWidth="181.0" text="Save Changes" />
+      <Label fx:id="labelSuccess" layoutX="173.0" layoutY="551.0" prefHeight="33.0" prefWidth="393.0" textFill="#017c87">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboRiddles" layoutX="151.0" layoutY="78.0" onAction="#showProdDetails" prefHeight="26.0" prefWidth="437.0" promptText="Please choose a riddle to edit:" />
+      <TextArea fx:id="desc" editable="false" layoutX="268.0" layoutY="253.0" prefHeight="81.0" prefWidth="181.0" promptText="Description" style="-fx-opacity: 0.8;" wrapText="true" />
+   </children>
+</AnchorPane>

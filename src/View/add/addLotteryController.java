@@ -1,5 +1,7 @@
 package View.add;
 
+import org.apache.batik.anim.timing.SyncbaseTimingSpecifier;
+
 import Control.Logic.LotteryLogic;
 import Exceptions.MissingInputException;
 import javafx.event.ActionEvent;
@@ -50,7 +52,7 @@ public class addLotteryController {
 		initialize();
 	}
 	
-	void initialize() {
+	public void initialize() {
 		lblSuccess.setVisible(false);
 		txtParticipants.setText("");
 		txtWinners.setText("");
@@ -59,7 +61,7 @@ public class addLotteryController {
 		
 		//Forces numbers only
 		txtParticipants.textProperty().addListener((observable, oldValue, newValue) -> {
-		    if (!newValue.matches("\\d*")) {
+		    if (!newValue.matches("[0-9]+")) {
 		    	txtParticipants.setText(newValue.replaceAll("[^\\d]", ""));
 		    }
 		});

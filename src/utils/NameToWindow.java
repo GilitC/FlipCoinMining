@@ -12,6 +12,7 @@ public enum NameToWindow {
 	MENU_EXPORT("menus/products"),
 	ADD_LOTTERY("add/addLottery"),
 	ADD_BONUS("add/addBonus"),
+	EDIT_RIDDLE("admin/editRiddlesLvl"),
 
 	
 	/*------------MENUS USER-------------------------------------------------*/

@@ -40,9 +40,17 @@ public class addBonusController {
 		initialize();
 	}
 
-	void initialize() {
+	public void initialize() {
 		lblSuccess.setVisible(false);
 		txtAreaDesc.setText("");
+		
+		//Forces text only
+		txtAreaDesc.textProperty().addListener((observable, oldValue, newValue) -> {
+		    if (!newValue.matches("[a-z A-Z]+")) {
+		    	txtAreaDesc.setText(newValue.replaceAll("[^a-z A-Z]", ""));
+		    }
+		});
+ 
 	}
 
 
