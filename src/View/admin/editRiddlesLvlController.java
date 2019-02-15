@@ -94,6 +94,9 @@ public class editRiddlesLvlController {
     void showProdDetails(ActionEvent event) {
     	Riddle myRid = comboRiddles.getSelectionModel().getSelectedItem();
     	
+    	if (myRid == null) {
+    		return;
+    	}
     	int riddleID = RiddleLogic.getInstance().getALLRiddles().indexOf(myRid);
     	Riddle r = RiddleLogic.getInstance().getALLRiddles().get(riddleID);
 
