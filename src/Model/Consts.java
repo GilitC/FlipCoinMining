@@ -75,8 +75,16 @@ public final class Consts {
 	public static final String SQL_ADD_TRANSACTION = "INSERT INTO TblTransaction ( transactionID, size, type, fee, blockAddress, additionTime, additionDate ) VALUES ( ? , ? , ? , ? , ? , ? , ? )";
 	public static final String SQL_UPD_TRANSACTIONS_BLOCK = "UPDATE TblTransaction SET TblTransaction.blockAddress = ? WHERE TblTransaction.transactionID = ? " ;			
 
+	/*----------------------------------------- LOTTERY QUERIES --------------------------------------------*/
+	public static final String SQL_ADD_LOTTERY = "INSERT INTO tblLottery ( lotDate, maxParticipants, numberOfWinners, numberOfBonuses ) VALUES ( ? , ? , ? , ? )";
+	public static final String SQL_SEL_LOTTERIES = "SELECT * FROM tblLottery ORDER BY tblLottery.lotDate DESC"; //Order By Date
+	
+	/*----------------------------------------- BONUS QUERIES --------------------------------------------*/
+	public static final String SQL_ADD_BONUS = "INSERT INTO tblBonus ( description ) VALUES ( ? )";
+	
+	
 	/*----------------------------------------- RECOMMENDATION QUERIES --------------------------------------------*/
-//	public static final String SQL_SEL_RECOMMENDATION = "SELECT * FROM TblRecommendation";
+//public static final String SQL_SEL_RECOMMENDATION = "SELECT * FROM TblRecommendation";
 //	
 //	public static String usersByRecc(int recID) {
 //		String SQL_SEL_USERSBYRECID = "SELECT TblUserGetRecommendation.levelOfImportance, TblUserGetRecommendation.publicAddress, TblUserGetRecommendation.userSignature, TblUserGetRecommendation.recommendId\r\n" + 

@@ -7,12 +7,17 @@ public enum NameToWindow {
 	WELCOMESCREEN("welcome"),
 	
 
-	/*------------MENUS-------------------------------------------------*/
+	/*------------MENUS ADMIN-------------------------------------------------*/
 	MENU_IMPORT("menus/reportsMenu"),
 	MENU_EXPORT("menus/products"),
+	ADD_LOTTERY("add/addLottery"),
+
+	
+	/*------------MENUS USER-------------------------------------------------*/
 	MENU_VIEWRECOMMENDEDTRANS("recommendedPairsReport"),
 	MENU_ADDTRANSTOBLOCK("add/addTransToBlock"),
 	MENU_VIEW("menus/recMenu"),
+	VIEW_MINERS("menus/viewAllMiners"),
 	QUERIES("menus/queries");
 	
 	

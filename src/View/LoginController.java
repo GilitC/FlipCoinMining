@@ -106,7 +106,7 @@ public class LoginController {
 										
 							Stage stage = (Stage) login.getScene().getWindow();
 							stage.close();
-							FXMLLoader load = new FXMLLoader(getClass().getResource("/View/AdminMenuSidebar.fxml"));
+							FXMLLoader load = new FXMLLoader(getClass().getResource("/View/MinerMenuSidebar.fxml"));
 
 							Stage primaryStage = new Stage();
 							Parent root = load.load();
@@ -117,12 +117,12 @@ public class LoginController {
 						else
 							throw new InvalidInputException("Wrong password. Please try again.");
 					}
-			}
 			} else {//if no active user has entered, popup wrong username and password.
 				alert.setHeaderText("Failed to login.");
-				alert.setContentText("wrong username/password");
+				alert.setContentText("Wrong username/password");
 				alert.show();
 			}
+		}
 		}catch(NumberFormatException e) {//catch exception if trying to convert string to integer
 			new InvalidInputException("Numbers only in this field please");
 		}catch(InvalidInputException e) {

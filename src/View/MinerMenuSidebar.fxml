@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AdminMenuController">
+<AnchorPane stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MinerMenuController">
 
    <children>
       <ImageView fitHeight="732.0" fitWidth="976.0" pickOnBounds="true" preserveRatio="true">
@@ -38,32 +38,37 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToaddLottery" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="Add Lottery">
+            <Button mnemonicParsing="false" onAction="#GoToViewMyInfo" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="View My Info">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToAddBonus" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Add Bonus">
+            <Button mnemonicParsing="false" onAction="#GoToVIewTransRep" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="Recommend Pair Report">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToEditRiddleLvl" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Update Riddle Level">
+            <Button mnemonicParsing="false" onAction="#GoToAddTransToBlock" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Transactions To Block">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToImporttoFCM" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Import to FCM">
+            <Button mnemonicParsing="false" onAction="#GoToRiddlesUser" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="Solve Riddles">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToExporttoFCT" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Export to FCT">
+            <Button mnemonicParsing="false" onAction="#GoToLotteriesUser" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="Join Lottery">
                <effect>
                   <Glow />
                </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#GoToCMinerReport" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Miners Report">
+            <Button mnemonicParsing="false" onAction="#GoToVIewAllMiners" prefHeight="71.0" prefWidth="182.0" styleClass="menuButton" text="View Miners">
+               <effect>
+                  <Glow />
+               </effect>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#GoToMarketReport" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Daily Market Report">
                <effect>
                   <Glow />
                </effect>
