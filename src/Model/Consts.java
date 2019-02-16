@@ -28,9 +28,10 @@ public final class Consts {
 
 	/*----------------------------------------- USER QUERIES -----------------------------------------*/
 	public static final String SQL_SEL_MINERS = "SELECT * FROM TblMiner";
-	public static final String SQL_DEL_MINER = "{ call qryDelMiner(?) }";
-	public static final String SQL_INS_MINER = "{ call qryInsMiner(?,?,?,?,?) }";
-	public static final String SQL_UPD_MINER = "{ call qryUpdMiner(?,?,?,?,?) }";
+ 
+	public static final String SQL_ADD_MINER = "INSERT INTO tblMiner ( uniqueAddress, minerName, password, digitalProfit, email ) VALUES ( ? , ? , ? , ? , ? )";
+	public static final String SQL_ADD_BSCompany = "INSERT INTO tblBusinessCompany ( uniqueAddress, contactName, contactPhone, contactEmail ) VALUES ( ? , ? , ? , ? )";
+	
 	
 	public static final String SQL_UPD_MINER_PROFIT = "UPDATE TblMiner SET TblMiner.digitalProfit = ? WHERE TblMiner.uniqueAddress= ? " ;	
 
@@ -92,6 +93,13 @@ public final class Consts {
 	public static final String SQL_ADD_RIDDLE = "INSERT INTO tblRiddle ( publishTime, publishDate, description, solutionTime, status, riddleLevel ) VALUES ( ? , ? , ? , ? , ? , ? )";
 	//public static final String SQL_SENDRECTOUSER = "INSERT INTO TblUserGetRecommendation ( levelOfImportance, publicAddress, userSignature, recommendId ) VALUES ( ? , ? , ? , ? )";
 
+	
+	/*----------------------------------------- PARTICIPANT QUERIES --------------------------------------------*/
+	public static final String SQL_SEL_PARTICIPANTS_INLOT = "SELECT tblParticipant.lotteryNumber, tblParticipant.uniqueAddress, tblParticipant.isWinner\r\n" + 
+			"FROM tblParticipant\r\n" + 
+			"WHERE tblParticipant.lotteryNumber=?";
+	
+	public static final String SQL_ADD_PARTICIPANT = "INSERT INTO tblParticipant ( lotteryNumber, uniqueAddress, isWinner ) VALUES ( ? , ? , ? )";
 
 	/*----------------------------------------- MORE QUERIES ----------------------------------------------*/
 

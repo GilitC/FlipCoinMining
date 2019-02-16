@@ -1,26 +1,20 @@
 package View.miner;
 
-import Control.Logic.TransactionLogic;
-
 import java.util.ArrayList;
-import java.util.ListIterator;
-
+import java.util.Date;
 import Control.SysData;
-import Control.Logic.BlockLogic;
-import Control.Logic.MinerLogic;
+import Control.Logic.LotteryLogic;
+import Control.Logic.ParticipantLogic;
 import Exceptions.ListNotSelectedException;
-import Model.Transaction;
-import Model.Block;
 import Model.Lottery;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Model.Miner;
+import Model.Participant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import View.WindowManager;
@@ -44,39 +38,44 @@ public class signUpToLotteryController {
 	@FXML
 	private Button buttonAdd;
 
+	private Miner mIn;
+
 	@FXML
 	void goToAddUserToLot(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Add Transaction");
+		alert.setTitle("Sign Up To Lottery");
 		alert.setHeaderText("");
 
 		try {
 
-			if (listTransactions.getSelectionModel().isEmpty()) {
-				throw new ListNotSelectedException("Transaction");
+			if (comboBoxLotteries.getSelectionModel().isEmpty()) {
+				throw new ListNotSelectedException("Lottery");
 			}
 
-			if (comboBoxBlock.getSelectionModel().isEmpty()) {
-				throw new ListNotSelectedException("Block");
+			mIn = SysData.getInstance().getLoggedInMiner();
+
+			Lottery l = comboBoxLotteries.getSelectionModel().getSelectedItem();
+			
+			//Check the participants of the lottery
+			ArrayList<Participant> allParticipants= ParticipantLogic.getInstance().getALLParticipantsInLottery(l.getLotteryNumber());
+			if(allParticipants.contains(mIn)){
+				alert.setHeaderText("Unable to Sign Up");
+				alert.setContentText("You have already signed up to this Lottery.");
+				alert.show();
 			}
-
-
-			String blockAddress = comboBoxBlock.getSelectionModel().getSelectedItem().getBlockAddress();
-			Integer transactionID = listTransactions.getSelectionModel().getSelectedItem().getTransactionID();
-
-			Double transactionfee = listTransactions.getSelectionModel().getSelectedItem().getFee();
-			Double newProfit = SysData.getInstance().getLoggedInMiner().getDigitalProfit() + transactionfee;
-			String minerAddress = SysData.getInstance().getLoggedInMiner().getUniqueAddress();
-
-			if (TransactionLogic.getInstance().updateTransaction(blockAddress, transactionID)
-					&& MinerLogic.getInstance().updateMinerDigitalProfit(newProfit, minerAddress)) {
-				alert.setHeaderText("Success");
-				alert.setContentText("Added Transaction To Block succesfully!");
-				alert.show();			
+			else if(allParticipants.size()>=l.getMaxParticipants()){
+				alert.setHeaderText("Unable to Sign Up");
+				alert.setContentText("Lottery is Full. Please try again.");
+				alert.show();
+			}
+			else if (ParticipantLogic.getInstance().addParticipant(l.getLotteryNumber(), mIn.getUniqueAddress(), String.valueOf(0))) {
+		
 				initialize();
+				lblSuccess.setText("Signed up to lottery successfully!");
+				lblSuccess.setVisible(true);
 			} else {
-				alert.setHeaderText("Unable to add the Transaction to the block.");
-				alert.setContentText("Transaction wasn't added.");
+				alert.setHeaderText("Unable to Sign Up");
+				alert.setContentText("Please try again later.");
 				alert.show();
 			}
 
@@ -89,9 +88,18 @@ public class signUpToLotteryController {
 	//Initialize the combobox 
 	public void initialize() {
 		//Checks that the Date of the lottery did not pass
-		// Checks how many already signed up to this lottery and that our logged in miner is not one of them
-		comboBoxBlock.getItems().setAll(BlockLogic.getInstance().getsBlockbyMiner(SysData.getInstance().getLoggedInMiner().getUniqueAddress()));
-	}
+		// Later after lottery is picked we will check how many already signed up to this lottery and that our logged in miner is not one of them
+		ArrayList<Lottery> allL = LotteryLogic.getInstance().getALLLotteries();
+		ArrayList<Lottery> lotsToShow = new ArrayList<Lottery>();
+		for(Lottery lt : allL){
+			Date today = new Date();
+			if(today.before(lt.getDateLot())) {
+				lotsToShow.add(lt);
+			}
+		}
+		comboBoxLotteries.getItems().setAll(lotsToShow);
+		lblSuccess.setVisible(false);
+		}
 
 	@FXML
 	void goBack(ActionEvent event) {

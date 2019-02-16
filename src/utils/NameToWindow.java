@@ -21,6 +21,7 @@ public enum NameToWindow {
 	MENU_VIEW("menus/recMenu"),
 	VIEW_MINERS("menus/viewAllMiners"),
 	VIEW_MY_INFO("miner/viewMyInfo"),
+	SIGN_UP_TO_LOTTERY("miner/signUpToLottery"),
 	QUERIES("menus/queries");
 	
 	

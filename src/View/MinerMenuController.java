@@ -72,7 +72,7 @@ public class MinerMenuController implements Initializable{
 
 	@FXML
 	void GoToLotteriesUser(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
+		loadUI(NameToWindow.SIGN_UP_TO_LOTTERY);
 	}
 
 	@FXML
