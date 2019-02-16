@@ -52,7 +52,7 @@ public class MinerMenuController implements Initializable{
 	
 	@FXML
 	void GoToViewMyInfo(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
+		loadUI(NameToWindow.VIEW_MY_INFO);
 	}
 
 	@FXML

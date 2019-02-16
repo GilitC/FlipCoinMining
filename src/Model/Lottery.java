@@ -89,9 +89,9 @@ public class Lottery {
 
 	@Override
 	public String toString() {
-		return "Lottery [lotteryNumber=" + lotteryNumber + ", dateLot=" + dateLot + ", maxParticipants="
-				+ maxParticipants + ", numberOfWinners=" + numberOfWinners + ", numberOfBonuses=" + numberOfBonuses
-				+ "]";
+		return "Lottery Number: " + lotteryNumber + ", Date: " + dateLot + ", Max Participants: "
+				+ maxParticipants + ", Number Of Winners: " + numberOfWinners + ", Number of Bonuses: " + numberOfBonuses
+				+ "";
 	}
 	
 	

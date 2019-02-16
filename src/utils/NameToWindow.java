@@ -20,6 +20,7 @@ public enum NameToWindow {
 	MENU_ADDTRANSTOBLOCK("add/addTransToBlock"),
 	MENU_VIEW("menus/recMenu"),
 	VIEW_MINERS("menus/viewAllMiners"),
+	VIEW_MY_INFO("miner/viewMyInfo"),
 	QUERIES("menus/queries");
 	
 	

@@ -1,6 +1,9 @@
 package View.menus;
 
 
+import java.util.ArrayList;
+
+import Control.SysData;
 import Control.Logic.MinerLogic;
 import Model.Miner;
 import javafx.collections.FXCollections;
@@ -25,8 +28,12 @@ public class viewAllMinersController {
 
 
 	public void initialize() {
-		ObservableList<Miner> mins = FXCollections.observableArrayList(MinerLogic.getInstance().getALLMiners());
-		listofSentUsers.setItems(mins);
+		ArrayList<Miner> allM = MinerLogic.getInstance().getALLMiners();
+		if(allM!=null) {
+			allM.remove(SysData.getInstance().getLoggedInMiner()); // Remove logged in miner from all miners list
+			ObservableList<Miner> mins = FXCollections.observableArrayList(allM);
+			listofSentUsers.setItems(mins);
+		}
 	}
 
 	@FXML
