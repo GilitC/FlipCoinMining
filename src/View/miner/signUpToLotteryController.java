@@ -55,10 +55,11 @@ public class signUpToLotteryController {
 			mIn = SysData.getInstance().getLoggedInMiner();
 
 			Lottery l = comboBoxLotteries.getSelectionModel().getSelectedItem();
+			Participant p = new Participant(l.getLotteryNumber(), mIn.getUniqueAddress(), String.valueOf(0));
 			
 			//Check the participants of the lottery
 			ArrayList<Participant> allParticipants= ParticipantLogic.getInstance().getALLParticipantsInLottery(l.getLotteryNumber());
-			if(allParticipants.contains(mIn)){
+			if(allParticipants.contains(p)){
 				alert.setHeaderText("Unable to Sign Up");
 				alert.setContentText("You have already signed up to this Lottery.");
 				alert.show();
