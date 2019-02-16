@@ -5,12 +5,12 @@ public class BusinessCompany{
 	// -------------------------------Class Memebers------------------------------
 	private String uniqueAddress;
 	private String contactName;
-	private int contactPhone;
+	private String contactPhone;
 	private String contactEmail;
 	
 	// -------------------------------Constructor------------------------------
 	
-	public BusinessCompany(String uniqueAddress, String contactName, int contactPhone, String contactEmail) {
+	public BusinessCompany(String uniqueAddress, String contactName, String contactPhone, String contactEmail) {
 		this.uniqueAddress = uniqueAddress;
 		this.contactName = contactName;
 		this.contactPhone = contactPhone;
@@ -35,11 +35,11 @@ public class BusinessCompany{
 		this.contactName = contactName;
 	}
 
-	public int getContactPhone() {
+	public String getContactPhone() {
 		return contactPhone;
 	}
 
-	public void setContactPhone(int contactPhone) {
+	public void setContactPhone(String contactPhone) {
 		this.contactPhone = contactPhone;
 	}
 
@@ -78,8 +78,8 @@ public class BusinessCompany{
 
 	@Override
 	public String toString() {
-		return "BusinessCompany [uniqueAddress=" + uniqueAddress + ", contactName=" + contactName + ", contactPhone="
-				+ contactPhone + ", contactEmail=" + contactEmail + "]";
+		return "Business Company uniqueAddress=" + uniqueAddress + ", contact Name=" + contactName + ", contact Phone="
+				+ contactPhone + ", contact Email=" + contactEmail + "]";
 	}
 	
 	

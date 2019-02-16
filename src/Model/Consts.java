@@ -35,6 +35,8 @@ public final class Consts {
 	
 	public static final String SQL_UPD_MINER_PROFIT = "UPDATE TblMiner SET TblMiner.digitalProfit = ? WHERE TblMiner.uniqueAddress= ? " ;	
 
+	public static final String SQL_CHECK_MINERUSERNAMES = "SELECT count(*) as count from tblMiner where uniqueAddress = ?";
+	
 	/*----------------------------------------- BLOCK QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_BLOCK = "SELECT * FROM TblBlock"; 
 	

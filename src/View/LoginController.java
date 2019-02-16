@@ -135,12 +135,13 @@ public class LoginController {
 
 	@FXML
 	void register(ActionEvent event) throws IOException {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Login");
-		alert.setHeaderText("");
-		alert.setHeaderText("Forgot Password?");
-		alert.setContentText("To reset your password, Please contact us at Admin@FlipCoinMining.com. Thank you!");
-		alert.show();
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/View/miner/SignUpMiner.fxml"));
+
+		Stage primaryStage = new Stage();
+		Parent root = load.load();
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 }

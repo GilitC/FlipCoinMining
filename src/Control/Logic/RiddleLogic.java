@@ -109,42 +109,7 @@ public class RiddleLogic {
 		return false;
 	}
 
-	
-	/**
-	 * Editing a exist miner with the parameters received from the form.
-	 * return true if the update was successful, else - return false
-     * @return 
-	 */
-	public boolean editMiner(String uniqueAddress, String name, String password, double digitalProfit,
-			String email) {
-		try {
-			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
-					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_MINER)) {
-				int i = 1;
 
-
-				stmt.setString(i++, uniqueAddress); // can't be null
-				stmt.setString(i++, name); // can't be null
-				stmt.setString(i++, password); // can't be null
-				stmt.setDouble(i++, digitalProfit); // can't be null
-				if (email != null)
-					stmt.setString(i++, email);
-				else
-					stmt.setNull(i++, java.sql.Types.VARCHAR);
-				
-				
-				stmt.executeUpdate();
-				return true;
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 	
 	/**
 	 * Editing an existing riddle's level with the parameters received from the form.
