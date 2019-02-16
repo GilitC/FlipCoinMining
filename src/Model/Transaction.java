@@ -116,8 +116,8 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return "Transaction [transactionID=" + transactionID + ", size=" + size + ", type=" + type + ", fee=" + fee
-				+ ", blockAddress=" + blockAddress + ", additionTime=" + additionTime + ", additionDate=" + additionDate
+		return "Transaction ID: " + transactionID + ", size: " + size + ", type: " + type + ", fee: " + fee
+				+ ", block Address: " + blockAddress + ", addition Time: " + additionTime + ", additionDate: " + additionDate
 				+ "]";
 	}
 

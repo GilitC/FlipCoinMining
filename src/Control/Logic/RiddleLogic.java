@@ -48,7 +48,7 @@ public class RiddleLogic {
 		}
 		return results;
 	}
-	
+
 	/**
 	 * fetches all riddle levels from DB file.
 	 * @return ArrayList of Riddles.
@@ -73,13 +73,44 @@ public class RiddleLogic {
 		}
 		return results;
 	}
-	
+
+	/**
+	 * Method gets a riddle id and possible solution and checks if they are a match
+	 * return true if yes, else - return false
+	 * @return 
+	 */
+	public Boolean checkIfSolutionMatchesRiddle(int riddleId, String result) {
+
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_CHECKMATCH_RIDDLE_SOLUTIONS);
+					) {
+				stmt.setInt(1, riddleId);
+				stmt.setString(2, result);
+				
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+				if (rs.getInt("count") > 0)
+				{
+					// There is a match
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	/*----------------------------------------- ADD / REMOVE / UPDATE USER METHODS --------------------------------------------*/
 
 	/**
 	 * Adding a new Riddle with the parameters received from the form.
 	 * return true if the insertion was successful, else - return false
-     * @return 
+	 * @return 
 	 */
 	public boolean addRiddle(Date publishTime, Date publishDate, String description, Date solutionTime,
 			String status, int riddleLevel) {
@@ -87,7 +118,7 @@ public class RiddleLogic {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
 					CallableStatement stmt = conn.prepareCall(Consts.SQL_ADD_RIDDLE)) {
-				
+
 				int i = 1;
 				stmt.setDate(i++, publishTime); // can't be null
 				stmt.setDate(i++, publishDate); // can't be null
@@ -96,10 +127,10 @@ public class RiddleLogic {
 				stmt.setString(i++, status); // can't be null
 				stmt.setInt(i++, riddleLevel); // can't be null
 
-				
+
 				stmt.executeUpdate();
 				return true;
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -110,11 +141,11 @@ public class RiddleLogic {
 	}
 
 
-	
+
 	/**
 	 * Editing an existing riddle's level with the parameters received from the form.
 	 * return true if the update was successful, else - return false
-     * @return 
+	 * @return 
 	 */
 	public boolean updateRiddleLevelID(int riddleLevel, int riddleNumber) {
 		try {
@@ -125,10 +156,10 @@ public class RiddleLogic {
 
 				stmt.setInt(i++, riddleLevel); // can't be null
 				stmt.setInt(i++, riddleNumber); // can't be null
-				
+
 				stmt.executeUpdate();
 				return true;
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -137,11 +168,11 @@ public class RiddleLogic {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Editing an existing riddle's status with the parameters received from the form.
 	 * return true if the update was successful, else - return false
-     * @return 
+	 * @return 
 	 */
 	public boolean updateRiddlestatus(String status, int riddleNumber) {
 		try {
@@ -152,10 +183,10 @@ public class RiddleLogic {
 
 				stmt.setString(i++, status); // can't be null
 				stmt.setInt(i++, riddleNumber); // can't be null
-				
+
 				stmt.executeUpdate();
 				return true;
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

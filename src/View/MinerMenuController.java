@@ -62,7 +62,7 @@ public class MinerMenuController implements Initializable{
 
 	@FXML
 	void GoToRiddlesUser(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
+		loadUI(NameToWindow.SOLVE_RIDDLES);
 	}
 
 	@FXML

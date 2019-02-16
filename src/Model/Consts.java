@@ -47,6 +47,9 @@ public final class Consts {
 		return SQL_SEL_BLOCKBYMINER;
 	}
 	
+	public static final String SQL_PREVIOUS_BLOCK_ADDRESS = "SELECT tblBlock.blockAddress FROM tblBlock WHERE (((tblBlock.previousBlock) Is Null)) GROUP BY tblBlock.blockAddress, tblBlock.minerAddress HAVING tblBlock.minerAddress=?"; 
+	public static final String SQL_COUNT_AMOUNT_BLOCKS_FOR_USER = "SELECT Count(tblBlock.blockAddress) AS count FROM tblBlock GROUP BY tblBlock.minerAddress HAVING tblBlock.minerAddress=?"; 
+	
 	
 	/*----------------------------------------- TRANSACTION QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_TRANSACTION = "SELECT * FROM TblTransaction ORDER BY TblTransaction.fee DESC"; //Order By Fee
@@ -89,11 +92,14 @@ public final class Consts {
 	/*----------------------------------------- RIDDLE QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_RIDDLES = "SELECT * FROM tblRiddle";
 	public static final String SQL_SEL_RIDDLELEVELS = "SELECT * FROM tblRiddleLevel";
+	
+	public static final String SQL_CHECKMATCH_RIDDLE_SOLUTIONS = "SELECT Count(tblSolution.solutionNumber) AS count FROM tblSolution\r\n" + 
+			"	WHERE tblSolution.riddleNumber=? AND tblSolution.result=?";
 
+	
 	public static final String SQL_UPD_RIDDLE_LEVEL = "UPDATE tblRiddle SET tblRiddle.riddleLevel = ? WHERE tblRiddle.riddleNumber=?" ;				
 	public static final String SQL_UPD_RIDDLE_STATUS = "UPDATE tblRiddle SET tblRiddle.status = ? WHERE tblRiddle.riddleNumber=?" ;			
 	public static final String SQL_ADD_RIDDLE = "INSERT INTO tblRiddle ( publishTime, publishDate, description, solutionTime, status, riddleLevel ) VALUES ( ? , ? , ? , ? , ? , ? )";
-	//public static final String SQL_SENDRECTOUSER = "INSERT INTO TblUserGetRecommendation ( levelOfImportance, publicAddress, userSignature, recommendId ) VALUES ( ? , ? , ? , ? )";
 
 	
 	/*----------------------------------------- PARTICIPANT QUERIES --------------------------------------------*/

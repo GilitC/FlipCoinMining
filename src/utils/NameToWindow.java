@@ -22,6 +22,7 @@ public enum NameToWindow {
 	VIEW_MINERS("menus/viewAllMiners"),
 	VIEW_MY_INFO("miner/viewMyInfo"),
 	SIGN_UP_TO_LOTTERY("miner/signUpToLottery"),
+	SOLVE_RIDDLES("miner/solveRiddles"),
 	QUERIES("menus/queries");
 	
 	

@@ -1,17 +1,20 @@
 package Model;
 
 import java.sql.Time;
+import java.util.Date;
 
 public class SolvedRiddle {
 
 	private String uniqueAddress;
 	private int riddleNumber;
-	private Time time;
+	private Date time;
+	private int place;
 	
-	public SolvedRiddle(String uniqueAddress, int riddleNumber, Time time) {
+	public SolvedRiddle(String uniqueAddress, int riddleNumber, Date time, int place) {
 		this.uniqueAddress = uniqueAddress;
 		this.riddleNumber = riddleNumber;
 		this.time = time;
+		this.place = place;
 	}
 
 	public String getUniqueAddress() {
@@ -30,12 +33,21 @@ public class SolvedRiddle {
 		this.riddleNumber = riddleNumber;
 	}
 
-	public Time getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	
+	public int getPlace() {
+		return place;
+	}
+
+	public void setPlace(int place) {
+		this.place = place;
 	}
 
 	@Override
@@ -68,8 +80,8 @@ public class SolvedRiddle {
 
 	@Override
 	public String toString() {
-		return "SolvedRiddle [uniqueAddress=" + uniqueAddress + ", riddleNumber=" + riddleNumber + ", time=" + time
-				+ "]";
+		return "Solved Riddle By: " + uniqueAddress + ", Riddle Number: " + riddleNumber + ", time and date: " + time
+				+ "place: " +this.place;
 	}
 	
 	
