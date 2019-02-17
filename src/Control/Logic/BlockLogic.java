@@ -77,7 +77,7 @@ public class BlockLogic {
 	 * Method returns the previous block address
      * @return 0 if it does not exist
 	 */
-	private int getPrevBlockAddress() {
+	public int getPrevBlockAddress() {
 		int add = 0;
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -99,6 +99,32 @@ public class BlockLogic {
 			return add;
 	}
 	
+	/**
+	 * Method returns the block size where the riddle level is given
+     * @return 0 if it does not exist
+	 */
+	public int getBlockSizebyRidLVL(int levelCode) {
+		int add = 0;
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						PreparedStatement stmt = conn.prepareStatement(Consts.SQL_SELECT_BLOCKSIZE_BY_RIDLVL);
+						) {
+					stmt.setInt(1, levelCode);
+					ResultSet rs = stmt.executeQuery();
+					if(rs.next())
+					{
+						return rs.getInt("blockSize");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();	
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();		
+			}
+			return add;
+	}
+	
 	/*----------------------------------------- ADD / REMOVE / UPDATE BLOCK METHODS --------------------------------------------*/
 
 	/**
@@ -106,7 +132,7 @@ public class BlockLogic {
 	 * return true if the insertion was successful, else - return false
      * @return 
 	 */
-	public boolean addBlock(Date creationDate, Date creationHour, int size, int previousBlock,
+	public boolean addBlock(int size, int previousBlock,
 			String minerAddress) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -114,9 +140,7 @@ public class BlockLogic {
 					CallableStatement stmt = conn.prepareCall(Consts.SQL_ADD_BLOCK)) {
 				
 				int i = 1;
-				
-				stmt.setDate(i++, new java.sql.Date(creationDate.getTime()));
-				stmt.setDate(i++, new java.sql.Date(creationHour.getTime()));
+
 				stmt.setInt(i++, size); // can't be null
 				stmt.setInt(i++, previousBlock); // can't be null
 				stmt.setString(i++, minerAddress); // can't be null

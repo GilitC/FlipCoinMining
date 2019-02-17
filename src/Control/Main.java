@@ -5,10 +5,14 @@ import javafx.application.Application;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.ListIterator;
 import Control.Logger;
 import Control.SysData;
+import Control.Logic.RiddleLogic;
 import Model.Consts;
+import Model.Riddle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -35,6 +39,21 @@ public class Main extends Application {
 			
 			scene.getWindow().centerOnScreen();
 			primaryStage.setResizable(false);
+			
+			//Check if there are any unsolved Riddles who's solution date is today - if there is, update the status to Irrelevant
+			ArrayList<Riddle> arr = RiddleLogic.getInstance().getALLRiddles();
+
+			//Show only those riddles who are between today and the given solution Time
+			//And were not solved yet
+			ListIterator<Riddle> iter = arr.listIterator();
+			Date today = new Date();
+			while(iter.hasNext()){
+				//Don't show the following riddles
+				if(iter.next().getSolutionTime().equals(today) && iter.next().getStatus()=="UnSolved"){
+					RiddleLogic.getInstance().updateRiddlestatus("Irrelevannt", iter.next().getRiddleNumber());
+				}
+			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -29,7 +29,6 @@ import org.json.simple.DeserializationException;
 import org.json.simple.JsonArray;
 import org.json.simple.JsonObject;
 import org.json.simple.Jsoner;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -293,7 +292,7 @@ public class TransactionLogic {
 	 * return true if the update was successful, else - return false
      * @return 
 	 */
-	public boolean updateTransaction(String blockAddress, int transactionID) {
+	public boolean updateTransaction(int blockAddress, int transactionID) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -301,7 +300,7 @@ public class TransactionLogic {
 				
 				int i = 1;
 
-				stmt.setString(i++, blockAddress); // can't be null
+				stmt.setInt(i++, blockAddress); // can't be null
 				stmt.setInt(i++, transactionID); // can't be null
 				stmt.executeUpdate();
 				return true;

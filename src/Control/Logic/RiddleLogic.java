@@ -110,7 +110,7 @@ public class RiddleLogic {
 	 * returns how many people already solved it: 0 - not solved yet, any other number - solved
      * @return 
 	 */
-	private int howManytimesRiddlewasSolved(int riddleNumber) {
+	public int howManytimesRiddlewasSolved(int riddleNumber) {
 		int place=0;
 			try {
 				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -121,6 +121,7 @@ public class RiddleLogic {
 					ResultSet rs = stmt.executeQuery();
 					if(rs.next())
 						return (rs.getInt("count"));
+					return 0;
 					
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -131,7 +132,7 @@ public class RiddleLogic {
 		return place;
 	}
 
-	/*----------------------------------------- ADD / REMOVE / UPDATE USER METHODS --------------------------------------------*/
+	/*----------------------------------------- ADD / REMOVE / UPDATE RIDDLE METHODS --------------------------------------------*/
 
 	/**
 	 * Adding a new Riddle with the parameters received from the form.
@@ -153,6 +154,34 @@ public class RiddleLogic {
 				stmt.setString(i++, status); // can't be null
 				stmt.setInt(i++, riddleLevel); // can't be null
 
+
+				stmt.executeUpdate();
+				return true;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * Adding a new solver to the riddle
+	 * return true if the insertion was successful, else - return false
+	 * @return 
+	 */
+	public boolean addSolverToRiddle(String uniqueAddress, int riddleNumber, int place) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_ADD_SOLVER_TO_RIDDLE)) {
+
+				int i = 1;
+				stmt.setString(i++, uniqueAddress); // can't be null
+				stmt.setInt(i++, riddleNumber); // can't be null
+				stmt.setInt(i++, place); // can't be null
 
 				stmt.executeUpdate();
 				return true;

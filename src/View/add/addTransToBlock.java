@@ -59,7 +59,7 @@ public class addTransToBlock {
 			}
 			
 
-			String blockAddress = comboBoxBlock.getSelectionModel().getSelectedItem().getBlockAddress();
+			int blockAddress = comboBoxBlock.getSelectionModel().getSelectedItem().getBlockAddress();
 			Integer transactionID = listTransactions.getSelectionModel().getSelectedItem().getTransactionID();
 			
 			Double transactionfee = listTransactions.getSelectionModel().getSelectedItem().getFee();

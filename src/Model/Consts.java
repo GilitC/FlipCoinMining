@@ -40,7 +40,7 @@ public final class Consts {
 	/*----------------------------------------- BLOCK QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_BLOCK = "SELECT * FROM tblBlock"; 
 	
-	public static final String SQL_ADD_BLOCK = "INSERT INTO tblBlock ( creationDate, creationHour, size, previousBlockID, minerAddress ) VALUES ( ? , ? , ? , ? , ? )";
+	public static final String SQL_ADD_BLOCK = "INSERT INTO tblBlock ( size, previousBlockID, minerAddress ) VALUES ( ? , ? , ? )";
 	
 	
 	public static String blockByMinerID(String minerAddress) {
@@ -52,6 +52,7 @@ public final class Consts {
 	
 	public static final String SQL_PREVIOUS_BLOCK_ADDRESS = "SELECT TOP 1 tblBlock.blockID FROM tblBlock order by blockID desc"; 
 	
+	public static final String SQL_SELECT_BLOCKSIZE_BY_RIDLVL = "SELECT TOP 1 tblRiddleLevel.blockSize FROM tblRiddleLevel WHERE tblRiddleLevel.levelCode=? GROUP BY tblRiddleLevel.blockSize"; 
 
 	public static final String SQL_COUNT_AMOUNT_BLOCKS_FOR_USER = "SELECT Count(tblBlock.blockID) AS count FROM tblBlock GROUP BY tblBlock.minerAddress HAVING tblBlock.minerAddress=?"; 
 	
@@ -107,6 +108,9 @@ public final class Consts {
 	public static final String SQL_UPD_RIDDLE_LEVEL = "UPDATE tblRiddle SET tblRiddle.riddleLevel = ? WHERE tblRiddle.riddleNumber=?" ;				
 	public static final String SQL_UPD_RIDDLE_STATUS = "UPDATE tblRiddle SET tblRiddle.status = ? WHERE tblRiddle.riddleNumber=?" ;			
 	public static final String SQL_ADD_RIDDLE = "INSERT INTO tblRiddle ( publishTime, publishDate, description, solutionTime, status, riddleLevel ) VALUES ( ? , ? , ? , ? , ? , ? )";
+
+	/*-----------------------------------------WHO SOLVED RIDDLE QUERIES --------------------------------------------*/
+	public static final String SQL_ADD_SOLVER_TO_RIDDLE = "INSERT INTO tblSolvedRiddle ( uniqueAddress, riddleNumber, place) VALUES ( ? , ? , ? )";
 
 	
 	/*----------------------------------------- PARTICIPANT QUERIES --------------------------------------------*/
