@@ -6,16 +6,16 @@ public class Block {
 
 	// -------------------------------Class  Members------------------------------
 	
-	public String blockAddress;
+	public int blockAddress;
 	public Date creationDate;
 	public Date creationHour;
 	public int size;
-	public String previousBlock;
+	public int previousBlock;
 	public String minerAddress;
 	
 	// -------------------------------Constructor------------------------------
 	
-	public Block(String blockAddress, Date creationDate, Date creationHour, int size, String previousBlock,
+	public Block(int blockAddress, Date creationDate, Date creationHour, int size, int previousBlock,
 			String minerAddress) {
 		this.blockAddress = blockAddress;
 		this.creationDate = creationDate;
@@ -27,12 +27,12 @@ public class Block {
 
 	// -------------------------------Getters And Setters------------------------------
 	
-	public String getBlockAddress() {
+	public int getBlockAddress() {
 		return blockAddress;
 	}
 
 
-	public void setBlockAddress(String blockAddress) {
+	public void setBlockAddress(int blockAddress) {
 		this.blockAddress = blockAddress;
 	}
 
@@ -67,12 +67,12 @@ public class Block {
 	}
 
 
-	public String getPreviousBlock() {
+	public int getPreviousBlock() {
 		return previousBlock;
 	}
 
 
-	public void setPreviousBlock(String previousBlock) {
+	public void setPreviousBlock(int previousBlock) {
 		this.previousBlock = previousBlock;
 	}
 
@@ -87,14 +87,14 @@ public class Block {
 	}
 
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((blockAddress == null) ? 0 : blockAddress.hashCode());
+		result = prime * result + blockAddress;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -105,20 +105,16 @@ public class Block {
 		if (getClass() != obj.getClass())
 			return false;
 		Block other = (Block) obj;
-		if (blockAddress == null) {
-			if (other.blockAddress != null)
-				return false;
-		} else if (!blockAddress.equals(other.blockAddress))
+		if (blockAddress != other.blockAddress)
 			return false;
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Block: Address=" + blockAddress + ", creationDate=" + creationDate + ", creationHour="
-				+ creationHour + ", size=" + size + ", previousBlock=" + previousBlock + ", minerAddress="
-				+ minerAddress + "|";
+		return "Block Address:" + blockAddress + ", creation Date: " + creationDate + ", creation Hour: "
+				+ creationHour + ", size=" + size + ", previous Block: " + previousBlock + ", minerAddress: "
+				+ minerAddress + "";
 	}
 	
 	

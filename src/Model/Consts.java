@@ -38,17 +38,22 @@ public final class Consts {
 	public static final String SQL_CHECK_MINERUSERNAMES = "SELECT count(*) as count from tblMiner where uniqueAddress = ?";
 	
 	/*----------------------------------------- BLOCK QUERIES --------------------------------------------*/
-	public static final String SQL_SEL_BLOCK = "SELECT * FROM TblBlock"; 
+	public static final String SQL_SEL_BLOCK = "SELECT * FROM tblBlock"; 
+	
+	public static final String SQL_ADD_BLOCK = "INSERT INTO tblBlock ( creationDate, creationHour, size, previousBlockID, minerAddress ) VALUES ( ? , ? , ? , ? , ? )";
+	
 	
 	public static String blockByMinerID(String minerAddress) {
-		String SQL_SEL_BLOCKBYMINER = "SELECT * FROM TblBlock \r\n" + 
+		String SQL_SEL_BLOCKBYMINER = "SELECT * FROM tblBlock \r\n" + 
 				"WHERE minerAddress IN (\""+minerAddress+"\")";
 		 Logger.log(SQL_SEL_BLOCKBYMINER);
 		return SQL_SEL_BLOCKBYMINER;
 	}
 	
-	public static final String SQL_PREVIOUS_BLOCK_ADDRESS = "SELECT tblBlock.blockAddress FROM tblBlock WHERE (((tblBlock.previousBlock) Is Null)) GROUP BY tblBlock.blockAddress, tblBlock.minerAddress HAVING tblBlock.minerAddress=?"; 
-	public static final String SQL_COUNT_AMOUNT_BLOCKS_FOR_USER = "SELECT Count(tblBlock.blockAddress) AS count FROM tblBlock GROUP BY tblBlock.minerAddress HAVING tblBlock.minerAddress=?"; 
+	public static final String SQL_PREVIOUS_BLOCK_ADDRESS = "SELECT TOP 1 tblBlock.blockID FROM tblBlock order by blockID desc"; 
+	
+
+	public static final String SQL_COUNT_AMOUNT_BLOCKS_FOR_USER = "SELECT Count(tblBlock.blockID) AS count FROM tblBlock GROUP BY tblBlock.minerAddress HAVING tblBlock.minerAddress=?"; 
 	
 	
 	/*----------------------------------------- TRANSACTION QUERIES --------------------------------------------*/
@@ -56,13 +61,13 @@ public final class Consts {
 	
 	public static final String SQL_SEL_TRANSACTIONTOEXPORT = "SELECT *\r\n" + 
 			"FROM tblTransaction\r\n" + 
-			"WHERE tblTransaction.blockAddress Is Not Null\r\n" + 
+			"WHERE tblTransaction.blockID Is Not Null\r\n" + 
 			"ORDER BY tblTransaction.fee DESC\r\n" + 
 			""; //Transactions to export are those who where placed into a block
 	
 	public static final String SQL_SEL_TRANSACTION_NULLBLOCK = "SELECT *\r\n" + 
 			"FROM tblTransaction\r\n" + 
-			"WHERE tblTransaction.blockAddress Is Null\r\n" + 
+			"WHERE tblTransaction.blockID Is Null\r\n" + 
 			"ORDER BY tblTransaction.fee DESC\r\n" + 
 			""; //show transactions who are not chosen yet
 	
@@ -95,7 +100,9 @@ public final class Consts {
 	
 	public static final String SQL_CHECKMATCH_RIDDLE_SOLUTIONS = "SELECT Count(tblSolution.solutionNumber) AS count FROM tblSolution\r\n" + 
 			"	WHERE tblSolution.riddleNumber=? AND tblSolution.result=?";
-
+	
+	public static final String SQL_CHECKIF_RIDDLE_WAS_SOLVED = "SELECT count(*) as count from tblSolvedRiddle where riddleNumber = ?"; 
+	
 	
 	public static final String SQL_UPD_RIDDLE_LEVEL = "UPDATE tblRiddle SET tblRiddle.riddleLevel = ? WHERE tblRiddle.riddleNumber=?" ;				
 	public static final String SQL_UPD_RIDDLE_STATUS = "UPDATE tblRiddle SET tblRiddle.status = ? WHERE tblRiddle.riddleNumber=?" ;			

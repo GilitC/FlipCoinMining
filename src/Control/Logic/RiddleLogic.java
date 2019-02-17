@@ -104,6 +104,32 @@ public class RiddleLogic {
 		}
 		return false;
 	}
+	
+	/**
+	 * Method checks if a riddle was solved using a counter
+	 * returns how many people already solved it: 0 - not solved yet, any other number - solved
+     * @return 
+	 */
+	private int howManytimesRiddlewasSolved(int riddleNumber) {
+		int place=0;
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						PreparedStatement stmt = conn.prepareStatement(Consts.SQL_CHECKIF_RIDDLE_WAS_SOLVED);
+						) {
+					stmt.setInt(1, riddleNumber);
+					ResultSet rs = stmt.executeQuery();
+					if(rs.next())
+						return (rs.getInt("count"));
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		return place;
+	}
 
 	/*----------------------------------------- ADD / REMOVE / UPDATE USER METHODS --------------------------------------------*/
 
