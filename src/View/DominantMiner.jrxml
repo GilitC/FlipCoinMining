@@ -1,51 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DominantMiner" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49c430e6-cbf3-419a-8626-65b9138eb36c">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FlipCoin Mining"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DominantMiner" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Access"/>
 	<parameter name="StartDate" class="java.sql.Date">
 		<defaultValueExpression><![CDATA[DATE(2019,02,05)]]></defaultValueExpression>
 	</parameter>
 	<parameter name="EndDate" class="java.sql.Date">
 		<defaultValueExpression><![CDATA[DATE(2019,02,05)]]></defaultValueExpression>
 	</parameter>
-	<queryString>
-		<![CDATA[select * from WRAPPERDOMINANTMINER order by Performence desc]]>
+	<queryString language="SQL">
+		<![CDATA[SELECT TblMiner.minerName, Count(TblBlock.minerAddress) AS NumberOfBlockes, Sum(TblBlock.size) AS Size
+FROM TblMiner INNER JOIN TblBlock ON TblMiner.uniqueAddress = TblBlock.minerAddress INNER JOIN tblSolvedRiddle ON TblMiner.uniqueAddress = tblSolvedRiddle.uniqueAddress
+WHERE TblBlock.creationDate>= $P{StartDate} And (TblBlock.creationDate<= $P{EndDate}) AND tblSolvedRiddle.place<>1
+GROUP BY TblMiner.minerName, TblMiner.uniqueAddress]]>
 	</queryString>
 	<field name="minerName" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="minerName"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="WRAPPERDOMINANTMINER"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tblMiner"/>
 	</field>
 	<field name="NumberOfBlockes" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="NumberOfBlockes"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="WRAPPERDOMINANTMINER"/>
 	</field>
 	<field name="Size" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.label" value="Size"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="WRAPPERDOMINANTMINER"/>
-	</field>
-	<field name="NotFirstPlace" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.label" value="NotFirstPlace"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="WRAPPERDOMINANTMINER"/>
-	</field>
-	<field name="Performence" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.label" value="Performence"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="WRAPPERDOMINANTMINER"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="134" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="-20" width="594" height="130" uuid="917cee7d-77e6-4b87-8bc6-bbb395a08455"/>
+				<imageExpression><![CDATA["http://www.ilhitrec.org/ilhitrec/images/header-tech-img.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="103" y="51" width="380" height="50" uuid="b08c251f-9b11-467e-8772-461ddc48d52f"/>
+				<textElement>
+					<font fontName="Script MT Bold" size="30" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dominant Miner Report]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="82" height="30" uuid="7790a7f9-0202-4ff6-9107-0957109efc82"/>
+				<text><![CDATA[MinerName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="100" height="30" uuid="51ed2c45-5d69-4f00-a81b-aac86e800934"/>
+				<text><![CDATA[NumberOfBlockes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="0" width="100" height="30" uuid="174d4605-2b1b-4d83-a619-88ac1036f29b"/>
+				<text><![CDATA[Size]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="100" height="30" uuid="3bfdff31-0d42-45a5-afcd-6b91cd7e08b6"/>
+				<text><![CDATA[Performence]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="48" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="10" width="100" height="30" uuid="a130be67-e85b-4222-a471-4557558ccfec"/>
+				<textFieldExpression><![CDATA[$F{minerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="10" width="100" height="30" uuid="4d0dfc0c-e04c-4595-be20-9497fffb2368"/>
+				<textFieldExpression><![CDATA[$F{NumberOfBlockes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="10" width="100" height="30" uuid="8dc4504e-cd87-42cb-8c5e-510bbb4a588c"/>
+				<textFieldExpression><![CDATA[$F{Size}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="9" width="100" height="30" uuid="09a8d7e8-9ef8-40c7-96d7-2a5c535857ac"/>
+				<textFieldExpression><![CDATA[new Double(($F{Size})/$F{NumberOfBlockes})]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

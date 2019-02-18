@@ -13,6 +13,7 @@ public enum NameToWindow {
 	ADD_LOTTERY("add/addLottery"),
 	ADD_BONUS("add/addBonus"),
 	EDIT_RIDDLE("admin/editRiddlesLvl"),
+	DOMINANT_REP("admin/reportsMenu"),
 
 	
 	/*------------MENUS USER-------------------------------------------------*/
