@@ -1,5 +1,7 @@
 package Control.Logic;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,8 +10,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.soap.Node;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import Model.Riddle;
 import Model.RiddleLevel;
+
 import Model.Consts;
 
 public class RiddleLogic {
@@ -248,4 +261,44 @@ public class RiddleLogic {
 		}
 		return false;
 	}
+	
+	
+//    /**
+//     * imports riddles and solutions from xml to db.
+//     * @param path xml filepath.
+//     */
+//    public void importRiddlesSolutionsFromXML(String path) {
+//    	try {
+//			Document doc = DocumentBuilderFactory.newInstance()
+//								.newDocumentBuilder().parse(new File(path));
+//			doc.getDocumentElement().normalize();
+//			NodeList nl = doc.getElementsByTagName("Customer");
+//			
+//			int errors = 0;
+//			for (int i = 0; i < nl.getLength(); i++) {
+//				if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
+//					Element el = (Element) nl.item(i);
+//					Riddle r = new Riddle(el.getAttribute("ID"), 
+//							el.getElementsByTagName("description").item(0).getTextContent(),
+//							el.getElementsByTagName("solutionTime").item(0).getTextContent(),
+//							el.getElementsByTagName("riddleLevel").item(0).getTextContent(),
+//							
+//							el.getElementsByTagName("Address").item(0).getTextContent(),
+//							el.getElementsByTagName("City").item(0).getTextContent(),
+//							el.getElementsByTagName("Country").item(0).getTextContent(),
+//							el.getElementsByTagName("Phone").item(0).getTextContent(),
+//							el.getElementsByTagName("Fax").item(0).getTextContent());
+//					if (!manipulateCustomer(r, Manipulation.INSERT) && 
+//							!manipulateCustomer(r, Manipulation.UPDATE))
+//						errors++;
+//				}
+//			}
+//			
+//			System.out.println((errors == 0) ? "customers data imported successfully!" : 
+//				String.format("customers data imported with %d errors!", errors));
+//			
+//		} catch (SAXException | IOException | ParserConfigurationException e) {
+//			e.printStackTrace();
+//		}
+//    }
 }

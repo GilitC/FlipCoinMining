@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><RiddlesAndSolutions_info>
-  <Riddle>
+  <Riddle ID="1">
     <description>5^2</description>
     <solutionTime>20/02/2019</solutionTime>
     <riddleLevel>1</riddleLevel>
     <Solution>
     	<solutionNumber>1</solutionNumber>
     	<result>25</result>
+    </Solution>
+  </Riddle>
+  <Riddle ID="2">
+    <description>4*3-2</description>
+    <solutionTime>21/02/2019</solutionTime>
+    <riddleLevel>1</riddleLevel>
+    <Solution>
+    	<solutionNumber>1</solutionNumber>
+    	<result>10</result>
     </Solution>
   </Riddle>
 </RiddlesAndSolutions_info>
