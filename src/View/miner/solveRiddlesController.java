@@ -70,9 +70,10 @@ public class solveRiddlesController {
 			int riddleLevel= comboBoxRiddles.getSelectionModel().getSelectedItem().getRiddleLevel();
 			int blockSizefromRid = BlockLogic.getInstance().getBlockSizebyRidLVL(riddleLevel);
 			String result = txtSolution.getText();
-
-			if (RiddleLogic.getInstance().checkIfSolutionMatchesRiddle(riddleId, result)) {
-				int numSolved = RiddleLogic.getInstance().howManytimesRiddlewasSolved(riddleId);
+			int numSolved =0;
+			
+			if (RiddleLogic.getInstance().checkIfSolutionMatchesRiddle(riddleId, result)) {			
+				numSolved = RiddleLogic.getInstance().howManytimesRiddlewasSolved(riddleId);
 				if(numSolved==0) {
 					if(RiddleLogic.getInstance().addSolverToRiddle(mIn.getUniqueAddress(), riddleId, numSolved+1)) {
 						if(BlockLogic.getInstance().addBlock(blockSizefromRid, BlockLogic.getInstance().getPrevBlockAddress(), mIn.getUniqueAddress())) {
