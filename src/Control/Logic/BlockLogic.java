@@ -88,7 +88,8 @@ public class BlockLogic {
 					ResultSet rs = stmt.executeQuery();
 					if(rs.next())
 					{
-						return rs.getInt("count");
+						int i=1;
+						return rs.getInt(i++);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();	

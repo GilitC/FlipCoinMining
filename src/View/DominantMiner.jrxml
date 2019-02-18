@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DominantMiner" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49c430e6-cbf3-419a-8626-65b9138eb36c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="StartDate" class="java.sql.Date">
+		<defaultValueExpression><![CDATA[DATE(2019,02,05)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="EndDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[DATE(2019,02,05)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT TblMiner.minerName, Count(TblBlock.minerAddress) AS NumberOfBlockes, Sum(TblBlock.size) AS Size, Count(tblSolvedRiddle.place) AS NotFirstPlace , (NumberOfBlockes/Size) AS Performance
+FROM TblMiner INNER JOIN TblBlock ON TblMiner.uniqueAddress = TblBlock.minerAddress INNER JOIN tblSolvedRiddle ON TblMiner.uniqueAddress = tblSolvedRiddle.uniqueAddress
+WHERE TblBlock.creationDate>=$P{StartDate} And TblBlock.creationDate<=$P{EndDate} AND tblSolvedRiddle.place<>1
+GROUP BY TblMiner.minerName, TblMiner.uniqueAddress
+ORDER BY NumberOfBlockes DESC]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

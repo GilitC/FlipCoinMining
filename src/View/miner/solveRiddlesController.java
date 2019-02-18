@@ -125,12 +125,7 @@ public class solveRiddlesController {
 		txtSolution.setText("");
 		comboBoxRiddles.getItems().setAll(arr);
 
-		//Forces text only
-		txtSolution.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (!newValue.matches("[a-z A-Z]+")) {
-				txtSolution.setText(newValue.replaceAll("[^a-z A-Z]", ""));
-			}
-		});
+
 	}
 
 
