@@ -37,7 +37,7 @@ public class LotteryLogic {
 				while (rs.next()) {
 					int i = 1;
 					results.add(new Lottery(rs.getInt(i++), rs.getDate(i++), rs.getInt(i++), 
-							rs.getInt(i++),rs.getInt(i++)));
+							rs.getInt(i++),rs.getInt(i++), rs.getBoolean(i++)));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -66,10 +66,39 @@ public class LotteryLogic {
 				stmt.setInt(i++, maxParticipants); // can't be null
 				stmt.setInt(i++, numberOfWinners); // can't be null
 				stmt.setInt(i++, numberOfBonuses); // can't be null
+				stmt.setBoolean(i++, false); // can't be null
 				
 				stmt.executeUpdate();
 				return true;
 				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+
+	/**
+	 * Editing an existing lotteries's status with the parameters received 
+	 * return true if the update was successful, else - return false
+	 * @return 
+	 */
+	public boolean updateLotterystatus(Boolean lotStatus, int lotteryNumber) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_LOTTERY_STATUS)) {
+				int i = 1;
+
+				stmt.setBoolean(i++, lotStatus); // can't be null
+				stmt.setInt(i++, lotteryNumber); // can't be null
+
+				stmt.executeUpdate();
+				return true;
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

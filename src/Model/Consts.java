@@ -88,12 +88,14 @@ public final class Consts {
 	public static final String SQL_UPD_TRANSACTIONS_BLOCK = "UPDATE TblTransaction SET TblTransaction.blockAddress = ? WHERE TblTransaction.transactionID = ? " ;			
 
 	/*----------------------------------------- LOTTERY QUERIES --------------------------------------------*/
-	public static final String SQL_ADD_LOTTERY = "INSERT INTO tblLottery ( lotDate, maxParticipants, numberOfWinners, numberOfBonuses ) VALUES ( ? , ? , ? , ? )";
+	public static final String SQL_ADD_LOTTERY = "INSERT INTO tblLottery ( lotDate, maxParticipants, numberOfWinners, numberOfBonuses, lotStatus ) VALUES ( ? , ? , ? , ? , ? )";
 	public static final String SQL_SEL_LOTTERIES = "SELECT * FROM tblLottery ORDER BY tblLottery.lotDate DESC"; //Order By Date
+	public static final String SQL_UPD_LOTTERY_STATUS = "UPDATE tblLottery SET tblLottery.lotStatus = ? WHERE tblLottery.lotteryNumber=?" ;				
 	
 	/*----------------------------------------- BONUS QUERIES --------------------------------------------*/
 	public static final String SQL_ADD_BONUS = "INSERT INTO tblBonus ( description ) VALUES ( ? )";
-	
+	public static final String SQL_INS_TO_GETBONUS = "INSERT INTO tblGetBonus ( lotteryNumber, uniqueAddress, bonusNumber ) VALUES ( ? , ? , ? )";
+	public static final String SQL_SEL_BONUSES = "SELECT * FROM tblBonus";
 	
 	/*----------------------------------------- RIDDLE QUERIES --------------------------------------------*/
 	public static final String SQL_SEL_RIDDLES = "SELECT * FROM tblRiddle";
@@ -120,6 +122,9 @@ public final class Consts {
 	
 	public static final String SQL_ADD_PARTICIPANT = "INSERT INTO tblParticipant ( lotteryNumber, uniqueAddress, isWinner ) VALUES ( ? , ? , ? )";
 
+	public static final String SQL_UPD_PARTICIPANT_STATUS = "UPDATE tblParticipant SET tblParticipant.isWinner = ? WHERE tblParticipant.lotteryNumber=? AND tblParticipant.uniqueAddress=?" ;			
+	
+	
 	/*----------------------------------------- MORE QUERIES ----------------------------------------------*/
 
 	/**

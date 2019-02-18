@@ -79,4 +79,32 @@ public class ParticipantLogic {
 		return false;
 	}
 
+	/**
+	 * Editing an existing participants status in a lottery with the parameters received 
+	 * return true if the update was successful, else - return false
+	 * @return 
+	 */
+	public boolean updateParticipantsstatus(String isWinner , int lotteryNumber, String uniqueAddress) {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					CallableStatement stmt = conn.prepareCall(Consts.SQL_UPD_PARTICIPANT_STATUS)) {
+				int i = 1;
+
+				stmt.setString(i++, isWinner); // can't be null
+				
+				stmt.setInt(i++, lotteryNumber); // can't be null
+				stmt.setString(i++, uniqueAddress); // can't be null
+
+				stmt.executeUpdate();
+				return true;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

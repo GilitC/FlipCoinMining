@@ -25,5 +25,8 @@
 	<classpathentry kind="lib" path="src/ucanaccess-3.0.7.jar"/>
 	<classpathentry kind="lib" path="src/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="json-simple-2.3.0.jar"/>
+	<classpathentry kind="lib" path="javax.mail.jar"/>
+	<classpathentry kind="lib" path="activation.jar"/>
+	<classpathentry kind="lib" path="additionnal.jar"/>
 	<classpathentry kind="output" path="jar"/>
 </classpath>

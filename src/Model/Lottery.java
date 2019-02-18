@@ -11,15 +11,17 @@ public class Lottery {
 	private int maxParticipants;
 	private int numberOfWinners;
 	private int numberOfBonuses;
+	private Boolean lotStatus;
 	
 	// -------------------------------Constructor------------------------------
 	
-	public Lottery(int lotteryNumber, Date dateLot, int maxParticipants, int numberOfWinners, int numberOfBonuses) {
+	public Lottery(int lotteryNumber, Date dateLot, int maxParticipants, int numberOfWinners, int numberOfBonuses, Boolean lotStatus) {
 		this.lotteryNumber = lotteryNumber;
 		this.dateLot = dateLot;
 		this.maxParticipants = maxParticipants;
 		this.numberOfWinners = numberOfWinners;
 		this.numberOfBonuses = numberOfBonuses;
+		this.lotStatus = lotStatus;
 	}
 	
 	
@@ -28,6 +30,16 @@ public class Lottery {
 	public int getLotteryNumber() {
 		return lotteryNumber;
 	}
+
+	public Boolean getLotStatus() {
+		return lotStatus;
+	}
+
+
+	public void setLotStatus(Boolean lotStatus) {
+		this.lotStatus = lotStatus;
+	}
+
 
 	public void setLotteryNumber(int lotteryNumber) {
 		this.lotteryNumber = lotteryNumber;
