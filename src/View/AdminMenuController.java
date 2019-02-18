@@ -109,7 +109,7 @@ public class AdminMenuController implements Initializable{
 
 	@FXML
 	void GoToCMinerReport(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
+		loadUI(NameToWindow.DOMINANT_REP);
 	}
 
 

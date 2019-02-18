@@ -2,13 +2,9 @@
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DominantMiner" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Access"/>
-	<parameter name="StartDate" class="java.sql.Date">
-		<defaultValueExpression><![CDATA[DATE(2019,02,05)]]></defaultValueExpression>
-	</parameter>
-	<parameter name="EndDate" class="java.sql.Date">
-		<defaultValueExpression><![CDATA[DATE(2019,02,05)]]></defaultValueExpression>
-	</parameter>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FlipCoin Mining"/>
+	<parameter name="StartDate" class="java.sql.Date"/>
+	<parameter name="EndDate" class="java.sql.Date"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT TblMiner.minerName, Count(TblBlock.minerAddress) AS NumberOfBlockes, Sum(TblBlock.size) AS Size
 FROM TblMiner INNER JOIN TblBlock ON TblMiner.uniqueAddress = TblBlock.minerAddress INNER JOIN tblSolvedRiddle ON TblMiner.uniqueAddress = tblSolvedRiddle.uniqueAddress

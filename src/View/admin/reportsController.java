@@ -5,42 +5,37 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Date;
+
 import Control.Logic.*;
 
-	public class reportsController {
+public class reportsController {
 
-	    @FXML
-	    private AnchorPane recoMenu;
+	@FXML
+	private AnchorPane recoMenu;
 
-	    @FXML
-	    private DatePicker datepicksend;
+	@FXML
+	private DatePicker datepicksend;
 
-	    @FXML
-	    private Button addRec;
+	@FXML
+	private Button addRec;
 
-	    @FXML
-	    private DatePicker datepickstart;
+	@FXML
+	private DatePicker datepickstart;
 
+	@FXML
+	void goToProduceTransRPT(ActionEvent event) {
 
-	    @FXML
-	    void goToProduceTransRPT(ActionEvent event) {
-	    	
-	    	java.sql.Date s;
-	    	java.sql.Date d;
-	    	
-	    	if(datepickstart.getValue()==null)
-	    		s = new java.sql.Date(2019-1900, 1, 5);
-	    	else
-	    		s = java.sql.Date.valueOf(datepickstart.getValue());
-	    	
-	    	if(datepicksend.getValue()==null)
-	    		d = new java.sql.Date(2019-1900, 1, 5);
-	    	else
-	    		d = java.sql.Date.valueOf(datepicksend.getValue());
-	    	
-	    	System.out.println("Trying to open report");
-	    	MinerLogic.getInstance().compileDominantMinerReport(s,d).setVisible(true);
-	    }
+		Date d1 = null, d2 = null;
 
-	
+		d1 = new Date(2018 - 1900, 1, 1);
+		d2 = new Date(2020 - 1900, 1, 25);
+
+		System.out.println("Trying to open report");
+		MinerLogic.getInstance().compileDominantMinerReport(d1, d2).setVisible(true);
+	}
+
 }
