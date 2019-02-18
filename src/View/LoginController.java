@@ -6,6 +6,7 @@ import Exceptions.MissingInputException;
 import Model.Miner;
 import Control.SysData;
 import Control.Logic.MinerLogic;
+import Control.Logic.RiddleLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Control.SysData;
+import Control.Logic.RiddleLogic;
 import Control.Logic.TransactionLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,7 +82,10 @@ public class AdminMenuController implements Initializable{
 		alert.setTitle("Import");
 		alert.setHeaderText("");
 
-		//TransactionLogic.getInstance().importTransactionsFromJSON("json/txs.json");
+		RiddleLogic.getInstance();
+		RiddleLogic.importRiddles();
+
+
 		alert.setHeaderText("Success");
 		alert.setContentText("Imported Riddles From XML Successfully!");
 		alert.show();	

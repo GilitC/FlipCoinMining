@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?><RiddlesAndSolutions_info>
   <Riddle ID="1">
     <description>5^2</description>
-    <solutionTime>20/02/2019</solutionTime>
+    <solutionTime>1550677351</solutionTime>
     <riddleLevel>1</riddleLevel>
-    <Solution>
-    	<solutionNumber>1</solutionNumber>
-    	<result>25</result>
-    </Solution>
+    <Solutions>
+    	<Solution>
+    		<solutionNumber>111</solutionNumber>
+    		<result>12</result>
+    	</Solution>
+    	<Solution>
+    		<test>1</test>
+    		<solutionNumber>123</solutionNumber>
+    		<result>25</result>
+    	</Solution>
+    	<Solution>
+    		<solutionNumber>2</solutionNumber>
+    		<result>23</result>
+    	</Solution>
+   	</Solutions>
   </Riddle>
   <Riddle ID="2">
     <description>4*3-2</description>
-    <solutionTime>21/02/2019</solutionTime>
+    <solutionTime>1550677351</solutionTime>
     <riddleLevel>1</riddleLevel>
-    <Solution>
-    	<solutionNumber>1</solutionNumber>
-    	<result>10</result>
-    </Solution>
+    <Solutions>
+  	  	<Solution>
+    		<solutionNumber>1</solutionNumber>
+    		<result>10</result>
+   		</Solution>
+   	</Solutions>
   </Riddle>
 </RiddlesAndSolutions_info>

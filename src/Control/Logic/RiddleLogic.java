@@ -9,12 +9,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.soap.Node;
 
+import org.joda.time.LocalDate;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -152,7 +156,7 @@ public class RiddleLogic {
 	 * return true if the insertion was successful, else - return false
 	 * @return 
 	 */
-	public boolean addRiddle(String description, Date solutionTime, int riddleLevel) {
+	public boolean addRiddle(String description, Date date, int riddleLevel) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
@@ -161,7 +165,7 @@ public class RiddleLogic {
 				int i = 1;
 
 				stmt.setString(i++, description); // can't be null
-				stmt.setDate(i++, solutionTime);  //can't be null
+				stmt.setDate(i++, date);  //can't be null
 				stmt.setString(i++, "Unsolved"); 
 				stmt.setInt(i++, riddleLevel); // can't be null, admin can change riddle levels later
 
@@ -263,42 +267,76 @@ public class RiddleLogic {
 	}
 	
 	
-//    /**
-//     * imports riddles and solutions from xml to db.
-//     * @param path xml filepath.
-//     */
-//    public void importRiddlesSolutionsFromXML(String path) {
-//    	try {
-//			Document doc = DocumentBuilderFactory.newInstance()
-//								.newDocumentBuilder().parse(new File(path));
-//			doc.getDocumentElement().normalize();
-//			NodeList nl = doc.getElementsByTagName("Customer");
-//			
-//			int errors = 0;
-//			for (int i = 0; i < nl.getLength(); i++) {
-//				if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
-//					Element el = (Element) nl.item(i);
-//					Riddle r = new Riddle(el.getAttribute("ID"), 
-//							el.getElementsByTagName("description").item(0).getTextContent(),
-//							el.getElementsByTagName("solutionTime").item(0).getTextContent(),
-//							el.getElementsByTagName("riddleLevel").item(0).getTextContent(),
-//							
-//							el.getElementsByTagName("Address").item(0).getTextContent(),
-//							el.getElementsByTagName("City").item(0).getTextContent(),
-//							el.getElementsByTagName("Country").item(0).getTextContent(),
-//							el.getElementsByTagName("Phone").item(0).getTextContent(),
-//							el.getElementsByTagName("Fax").item(0).getTextContent());
-//					if (!manipulateCustomer(r, Manipulation.INSERT) && 
-//							!manipulateCustomer(r, Manipulation.UPDATE))
-//						errors++;
-//				}
-//			}
-//			
-//			System.out.println((errors == 0) ? "customers data imported successfully!" : 
-//				String.format("customers data imported with %d errors!", errors));
-//			
-//		} catch (SAXException | IOException | ParserConfigurationException e) {
-//			e.printStackTrace();
-//		}
-//    }
+	/**
+	 * Import transactions from XML
+	 */
+	public static void importRiddles() {
+		try {
+			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(new File("xml/importRiddles.xml"));
+			doc.getDocumentElement().normalize();
+			NodeList nl = doc.getElementsByTagName("Riddle");
+			for (int i = 0; i < nl.getLength(); i++) {
+
+				if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
+					Element el = (Element) nl.item(i);
+					String description = el.getElementsByTagName("description").item(0).getTextContent();
+					String solutionTime = el.getElementsByTagName("solutionTime").item(0).getTextContent();
+					String riddleLevel = el.getElementsByTagName("riddleLevel").item(0).getTextContent();
+					
+					Long solutionTimeMS = Long.parseLong(solutionTime);
+					
+					Date d = new Date(solutionTimeMS);
+					
+				//	RiddleLogic.getInstance().addRiddle(description, d, Integer.parseInt(riddleLevel));
+					int id = RiddleLogic.getInstance().returnLastRiddleNumAdded();
+					if(id==0) {
+						return;
+					}
+					
+					NodeList solutions = el.getElementsByTagName("Solution");
+					for(int j = 0 ; j < solutions.getLength(); j++)
+					{
+						Integer solutionNumber = 0;
+						Integer result = 0;
+						String solNumStr = solutions.item(j).getTextContent();
+						System.out.println("RD: " + id + " J:"+j+" ::"+solNumStr);
+
+//						SolutionLogic.getInstance().addSolution(id, solutionNumber, result);
+					}
+					System.out.println("Riddle: " + description + " has #"+solutions.getLength()+" answers.");
+					
+					
+				}
+			}
+		} catch (SAXException | IOException | ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * method returns the id of last added riddle
+	 */
+	private int returnLastRiddleNumAdded() {
+		int id =0;
+			try {
+				Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+				try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+						PreparedStatement stmt = conn.prepareStatement(Consts.SQL_LAST_RIDDLE_ID_ADDED);
+						) {
+		
+					ResultSet rs = stmt.executeQuery();
+					while(rs.next()) {
+						return (rs.getInt(1));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		
+		return id;
+	}
+
 }
