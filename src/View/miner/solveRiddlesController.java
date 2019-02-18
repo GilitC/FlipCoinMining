@@ -90,6 +90,9 @@ public class solveRiddlesController {
 						alert.show();
 					}
 				}
+				
+				// update status
+				RiddleLogic.getInstance().updateRiddlestatus("Solved", riddleId);
 				initialize();
 			} else {
 				alert.setHeaderText("Sorry");

@@ -197,7 +197,7 @@ public class RiddleLogic {
 				stmt.setString(i++, uniqueAddress); // can't be null
 				stmt.setInt(i++, riddleNumber); // can't be null
 				stmt.setInt(i++, place); // can't be null
-
+				
 				stmt.executeUpdate();
 				return true;
 
