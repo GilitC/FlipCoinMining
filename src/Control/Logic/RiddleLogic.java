@@ -135,24 +135,22 @@ public class RiddleLogic {
 	/*----------------------------------------- ADD / REMOVE / UPDATE RIDDLE METHODS --------------------------------------------*/
 
 	/**
-	 * Adding a new Riddle with the parameters received from the form.
+	 * Adding a new Riddle with the parameters received 
 	 * return true if the insertion was successful, else - return false
 	 * @return 
 	 */
-	public boolean addRiddle(Date publishTime, Date publishDate, String description, Date solutionTime,
-			String status, int riddleLevel) {
+	public boolean addRiddle(String description, Date solutionTime, int riddleLevel) {
 		try {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
 					CallableStatement stmt = conn.prepareCall(Consts.SQL_ADD_RIDDLE)) {
 
 				int i = 1;
-				stmt.setDate(i++, publishTime); // can't be null
-				stmt.setDate(i++, publishDate); // can't be null
+
 				stmt.setString(i++, description); // can't be null
-				stmt.setDate(i++, solutionTime); // can't be null
-				stmt.setString(i++, status); // can't be null
-				stmt.setInt(i++, riddleLevel); // can't be null
+				stmt.setDate(i++, solutionTime);  //can't be null
+				stmt.setString(i++, "Unsolved"); 
+				stmt.setInt(i++, riddleLevel); // can't be null, admin can change riddle levels later
 
 
 				stmt.executeUpdate();

@@ -74,7 +74,19 @@ public class AdminMenuController implements Initializable{
 		alert.show();	
 	}
 
+	@FXML
+	void GoToImportRiddlesXML(ActionEvent event) {
+		loadUI(NameToWindow.WELCOMESCREEN);
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Import");
+		alert.setHeaderText("");
 
+		//TransactionLogic.getInstance().importTransactionsFromJSON("json/txs.json");
+		alert.setHeaderText("Success");
+		alert.setContentText("Imported Riddles From XML Successfully!");
+		alert.show();	
+	}
+	  
 	@FXML
 	void GoToaddLottery(ActionEvent event) {
 		loadUI(NameToWindow.ADD_LOTTERY);

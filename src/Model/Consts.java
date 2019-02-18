@@ -109,7 +109,7 @@ public final class Consts {
 	
 	public static final String SQL_UPD_RIDDLE_LEVEL = "UPDATE tblRiddle SET tblRiddle.riddleLevel = ? WHERE tblRiddle.riddleNumber=?" ;				
 	public static final String SQL_UPD_RIDDLE_STATUS = "UPDATE tblRiddle SET tblRiddle.status = ? WHERE tblRiddle.riddleNumber=?" ;			
-	public static final String SQL_ADD_RIDDLE = "INSERT INTO tblRiddle ( publishTime, publishDate, description, solutionTime, status, riddleLevel ) VALUES ( ? , ? , ? , ? , ? , ? )";
+	public static final String SQL_ADD_RIDDLE = "INSERT INTO tblRiddle ( description, solutionTime, status, riddleLevel ) VALUES ( ? , ? , ? , ? )";
 
 	/*-----------------------------------------WHO SOLVED RIDDLE QUERIES --------------------------------------------*/
 	public static final String SQL_ADD_SOLVER_TO_RIDDLE = "INSERT INTO tblSolvedRiddle ( uniqueAddress, riddleNumber, place) VALUES ( ? , ? , ? )";

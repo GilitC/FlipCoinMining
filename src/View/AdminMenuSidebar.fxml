@@ -68,6 +68,11 @@
                   <Glow />
                </effect>
             </Button>
+            <Button mnemonicParsing="false" onAction="#GoToImportRiddlesXML" prefHeight="26.0" prefWidth="195.0" styleClass="menuButton" text="Import Riddles XML">
+               <effect>
+                  <Glow />
+               </effect>
+            </Button>
          </children>
       </VBox>
       <FlowPane fx:id="menupane" layoutX="240.0" layoutY="43.0" prefHeight="582.0" prefWidth="700.0" />
