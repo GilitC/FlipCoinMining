@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="viewRecommend" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.marketreport">
+   <children>
+      <ImageView fitHeight="590.0" fitWidth="701.0" style="-fx-opacity: 0.2;">
+         <image>
+            <Image url="@../../bin/bg.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="237.0" layoutY="28.0" prefHeight="43.0" prefWidth="228.0" style="-fx-opacity: 0.8;" text="Daily Market Report" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblMarket" layoutY="78.0" prefHeight="480.0" prefWidth="701.0" />
+   </children>
+</AnchorPane>

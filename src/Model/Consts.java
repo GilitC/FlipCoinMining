@@ -130,7 +130,7 @@ public final class Consts {
 
 	public static final String SQL_UPD_PARTICIPANT_STATUS = "UPDATE tblParticipant SET tblParticipant.isWinner = ? WHERE tblParticipant.lotteryNumber=? AND tblParticipant.uniqueAddress=?" ;			
 	
-	
+	public static final String SQL_GET_DAILY_REPORT = "select * from tmp3";
 	/*----------------------------------------- MORE QUERIES ----------------------------------------------*/
 
 	/**

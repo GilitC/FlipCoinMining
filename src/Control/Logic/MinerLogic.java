@@ -61,6 +61,26 @@ public class MinerLogic {
 		return results;
 	}
 
+	/**
+	 * fetches all users from DB file.
+	 * 
+	 * @return ArrayList of miners.
+	 */
+	public ResultSet generateDailyMarketReport() {
+		try {
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			try (Connection conn = DriverManager.getConnection(Consts.CONN_STR);
+					PreparedStatement stmt = conn.prepareStatement(Consts.SQL_GET_DAILY_REPORT)) {
+				return stmt.executeQuery();
+			} catch (SQLException e) {
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	/*----------------------------------------- ADD / REMOVE / UPDATE USER METHODS --------------------------------------------*/
 
 	/**
@@ -188,8 +208,7 @@ public class MinerLogic {
 				System.out.println("Attempting to open jasper: "
 						+ TransactionLogic.class.getResource("../../View/DominantMiner.jasper"));
 				JasperPrint print = JasperFillManager.fillReport(
-						TransactionLogic.class.getResourceAsStream("../../View/DominantMiner.jasper"), toSend,
-						conn);
+						TransactionLogic.class.getResourceAsStream("../../View/DominantMiner.jasper"), toSend, conn);
 				JFrame frame = new JFrame("Transactions Report");
 				frame.getContentPane().add(new JRViewer(print));
 				frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -205,4 +224,3 @@ public class MinerLogic {
 		return null;
 	}
 }
-

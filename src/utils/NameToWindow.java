@@ -24,7 +24,7 @@ public enum NameToWindow {
 	VIEW_MY_INFO("miner/viewMyInfo"),
 	SIGN_UP_TO_LOTTERY("miner/signUpToLottery"),
 	SOLVE_RIDDLES("miner/solveRiddles"),
-	QUERIES("menus/queries");
+	QUERIES("menus/queries"), MARKET_REPORT("marketreport");
 	
 	
 	NameToWindow(String s)

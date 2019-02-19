@@ -77,7 +77,7 @@ public class MinerMenuController implements Initializable{
 
 	@FXML
 	void GoToMarketReport(ActionEvent event) {
-		loadUI(NameToWindow.WELCOMESCREEN);
+		loadUI(NameToWindow.MARKET_REPORT);
 	}
 
 

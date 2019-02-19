@@ -37,5 +37,7 @@ public class reportsController {
 		System.out.println("Trying to open report");
 		MinerLogic.getInstance().compileDominantMinerReport(d1, d2).setVisible(true);
 	}
+	
+	
 
 }
