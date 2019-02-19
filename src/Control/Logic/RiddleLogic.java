@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.soap.Node;
 
 import org.joda.time.LocalDate;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -288,7 +288,7 @@ public class RiddleLogic {
 					
 					Date d = new Date(solutionTimeMS);
 					
-				//	RiddleLogic.getInstance().addRiddle(description, d, Integer.parseInt(riddleLevel));
+					RiddleLogic.getInstance().addRiddle(description, d, Integer.parseInt(riddleLevel));
 					int id = RiddleLogic.getInstance().returnLastRiddleNumAdded();
 					if(id==0) {
 						return;
@@ -297,12 +297,11 @@ public class RiddleLogic {
 					NodeList solutions = el.getElementsByTagName("Solution");
 					for(int j = 0 ; j < solutions.getLength(); j++)
 					{
-						Integer solutionNumber = 0;
-						Integer result = 0;
-						String solNumStr = solutions.item(j).getTextContent();
-						System.out.println("RD: " + id + " J:"+j+" ::"+solNumStr);
+						
+						Integer solNumStr = j+1;
+						String result = solutions.item(j).getChildNodes().item(3).getTextContent();
 
-//						SolutionLogic.getInstance().addSolution(id, solutionNumber, result);
+						SolutionLogic.getInstance().addSolution(id, solNumStr, result);
 					}
 					System.out.println("Riddle: " + description + " has #"+solutions.getLength()+" answers.");
 					
